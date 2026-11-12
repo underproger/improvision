@@ -1,0 +1,354 @@
+<?php return array (
+  'unique_key' => 'category',
+  'preserve_keys' => false,
+  'update_object' => true,
+  'related_objects' => 
+  array (
+    'Chunks' => 
+    array (
+      'be14fa07316118cff1571a2fafe7799d' => 
+      array (
+        'preserve_keys' => false,
+        'update_object' => true,
+        'unique_key' => 'name',
+        'class' => 'modChunk',
+        'object' => '{"id":null,"source":0,"property_preprocess":0,"name":"tplBabellink","description":"","editor_type":0,"category":0,"cache_type":0,"snippet":"<li>\\n    <a href=\\"[[+url]]\\" class=\\"[[+cultureKey]][[+active:notempty=` [[+active]]`]]\\">\\n        [[+language]]\\n    <\\/a>\\n<\\/li>","locked":0,"properties":"a:0:{}","static":0,"static_file":"","content":"<li>\\n    <a href=\\"[[+url]]\\" class=\\"[[+cultureKey]][[+active:notempty=` [[+active]]`]]\\">\\n        [[+language]]\\n    <\\/a>\\n<\\/li>"}',
+        'guid' => '2d936b85ca8175d00bfae0b45fedfb2a',
+        'native_key' => NULL,
+        'signature' => '54bc28dee0bc72fd0c3b7f86b61c3eb8',
+      ),
+      '864443bc92a7f31d2afe260c9ccceeed' => 
+      array (
+        'preserve_keys' => false,
+        'update_object' => true,
+        'unique_key' => 'name',
+        'class' => 'modChunk',
+        'object' => '{"id":null,"source":0,"property_preprocess":0,"name":"tplBabellinkWrapper","description":"","editor_type":0,"category":0,"cache_type":0,"snippet":"<ul>\\n    [[+babelLinks]]\\n<\\/ul>","locked":0,"properties":"a:0:{}","static":0,"static_file":"","content":"<ul>\\n    [[+babelLinks]]\\n<\\/ul>"}',
+        'guid' => '019ac8612300b690f4d113d9857373a5',
+        'native_key' => NULL,
+        'signature' => 'a63f9d2f557acb63fb70e65ac953ef83',
+      ),
+      'ec83229cfc0af2579baf1b06a7b9c739' => 
+      array (
+        'preserve_keys' => false,
+        'update_object' => true,
+        'unique_key' => 'name',
+        'class' => 'modChunk',
+        'object' => '{"id":null,"source":0,"property_preprocess":0,"name":"tplBabelContextMenu","description":"","editor_type":0,"category":0,"cache_type":0,"snippet":"[[+name]] ([[+context_key]]) \\u2013 [[+description]] ([[+culture_key:default=`[[+context_key]]`]]))\\n","locked":0,"properties":"a:0:{}","static":0,"static_file":"","content":"[[+name]] ([[+context_key]]) \\u2013 [[+description]] ([[+culture_key:default=`[[+context_key]]`]]))\\n"}',
+        'guid' => '5a59d7bab359dbf039a4c33ef0038b32',
+        'native_key' => NULL,
+        'signature' => '19e2389fe9a28fef14053291b2d4ef7b',
+      ),
+    ),
+    'Snippets' => 
+    array (
+      'ce0a5e9e8fe41deec765a1cfdae36476' => 
+      array (
+        'preserve_keys' => false,
+        'update_object' => true,
+        'unique_key' => 'name',
+        'class' => 'modSnippet',
+        'object' => '{"id":null,"source":0,"property_preprocess":0,"name":"BabelLinks","description":"Displays links to translated resources.","editor_type":0,"category":0,"cache_type":0,"snippet":"\\/**\\n * BabelLinks\\n *\\n * @package babel\\n * @subpackage snippet\\n *\\n * @var modX $modx\\n * @var array $scriptProperties\\n *\\/\\n\\nuse mikrobi\\\\Babel\\\\Snippets\\\\BabelLinks;\\n\\n$corePath = $modx->getOption(\'babel.core_path\', null, $modx->getOption(\'core_path\') . \'components\\/babel\\/\');\\n\\/** @var Babel $babel *\\/\\n$babel = $modx->getService(\'babel\', Babel::class, $corePath . \'model\\/babel\\/\', [\\n    \'core_path\' => $corePath\\n]);\\n\\n$snippet = new BabelLinks($modx, $scriptProperties);\\nif ($snippet instanceof mikrobi\\\\Babel\\\\Snippets\\\\BabelLinks) {\\n    return $snippet->execute();\\n}\\nreturn \'mikrobi\\\\Babel\\\\Snippets\\\\BabelLinks class not found\';","locked":0,"properties":"a:14:{s:10:\\"resourceId\\";a:7:{s:4:\\"name\\";s:10:\\"resourceId\\";s:4:\\"desc\\";s:27:\\"babel.babellinks.resourceId\\";s:4:\\"type\\";s:9:\\"textfield\\";s:7:\\"options\\";s:0:\\"\\";s:5:\\"value\\";s:0:\\"\\";s:7:\\"lexicon\\";s:16:\\"babel:properties\\";s:4:\\"area\\";s:0:\\"\\";}s:3:\\"tpl\\";a:7:{s:4:\\"name\\";s:3:\\"tpl\\";s:4:\\"desc\\";s:20:\\"babel.babellinks.tpl\\";s:4:\\"type\\";s:9:\\"textfield\\";s:7:\\"options\\";s:0:\\"\\";s:5:\\"value\\";s:12:\\"tplBabellink\\";s:7:\\"lexicon\\";s:16:\\"babel:properties\\";s:4:\\"area\\";s:0:\\"\\";}s:10:\\"wrapperTpl\\";a:7:{s:4:\\"name\\";s:10:\\"wrapperTpl\\";s:4:\\"desc\\";s:27:\\"babel.babellinks.wrapperTpl\\";s:4:\\"type\\";s:9:\\"textfield\\";s:7:\\"options\\";s:0:\\"\\";s:5:\\"value\\";s:0:\\"\\";s:7:\\"lexicon\\";s:16:\\"babel:properties\\";s:4:\\"area\\";s:0:\\"\\";}s:9:\\"activeCls\\";a:7:{s:4:\\"name\\";s:9:\\"activeCls\\";s:4:\\"desc\\";s:26:\\"babel.babellinks.activeCls\\";s:4:\\"type\\";s:9:\\"textfield\\";s:7:\\"options\\";s:0:\\"\\";s:5:\\"value\\";s:6:\\"active\\";s:7:\\"lexicon\\";s:16:\\"babel:properties\\";s:4:\\"area\\";s:0:\\"\\";}s:15:\\"showUnpublished\\";a:7:{s:4:\\"name\\";s:15:\\"showUnpublished\\";s:4:\\"desc\\";s:32:\\"babel.babellinks.showUnpublished\\";s:4:\\"type\\";s:13:\\"combo-boolean\\";s:7:\\"options\\";s:0:\\"\\";s:5:\\"value\\";b:0;s:7:\\"lexicon\\";s:16:\\"babel:properties\\";s:4:\\"area\\";s:0:\\"\\";}s:11:\\"showCurrent\\";a:7:{s:4:\\"name\\";s:11:\\"showCurrent\\";s:4:\\"desc\\";s:28:\\"babel.babellinks.showCurrent\\";s:4:\\"type\\";s:13:\\"combo-boolean\\";s:7:\\"options\\";s:0:\\"\\";s:5:\\"value\\";b:0;s:7:\\"lexicon\\";s:16:\\"babel:properties\\";s:4:\\"area\\";s:0:\\"\\";}s:15:\\"includeUnlinked\\";a:7:{s:4:\\"name\\";s:15:\\"includeUnlinked\\";s:4:\\"desc\\";s:32:\\"babel.babellinks.includeUnlinked\\";s:4:\\"type\\";s:13:\\"combo-boolean\\";s:7:\\"options\\";s:0:\\"\\";s:5:\\"value\\";b:0;s:7:\\"lexicon\\";s:16:\\"babel:properties\\";s:4:\\"area\\";s:0:\\"\\";}s:16:\\"ignoreSiteStatus\\";a:7:{s:4:\\"name\\";s:16:\\"ignoreSiteStatus\\";s:4:\\"desc\\";s:33:\\"babel.babellinks.ignoreSiteStatus\\";s:4:\\"type\\";s:13:\\"combo-boolean\\";s:7:\\"options\\";s:0:\\"\\";s:5:\\"value\\";b:0;s:7:\\"lexicon\\";s:16:\\"babel:properties\\";s:4:\\"area\\";s:0:\\"\\";}s:15:\\"restrictToGroup\\";a:7:{s:4:\\"name\\";s:15:\\"restrictToGroup\\";s:4:\\"desc\\";s:32:\\"babel.babellinks.restrictToGroup\\";s:4:\\"type\\";s:13:\\"combo-boolean\\";s:7:\\"options\\";s:0:\\"\\";s:5:\\"value\\";b:0;s:7:\\"lexicon\\";s:16:\\"babel:properties\\";s:4:\\"area\\";s:0:\\"\\";}s:20:\\"useRequestProperties\\";a:7:{s:4:\\"name\\";s:20:\\"useRequestProperties\\";s:4:\\"desc\\";s:37:\\"babel.babellinks.useRequestProperties\\";s:4:\\"type\\";s:13:\\"combo-boolean\\";s:7:\\"options\\";s:0:\\"\\";s:5:\\"value\\";b:1;s:7:\\"lexicon\\";s:16:\\"babel:properties\\";s:4:\\"area\\";s:0:\\"\\";}s:7:\\"toArray\\";a:7:{s:4:\\"name\\";s:7:\\"toArray\\";s:4:\\"desc\\";s:24:\\"babel.babellinks.toArray\\";s:4:\\"type\\";s:13:\\"combo-boolean\\";s:7:\\"options\\";s:0:\\"\\";s:5:\\"value\\";b:0;s:7:\\"lexicon\\";s:16:\\"babel:properties\\";s:4:\\"area\\";s:0:\\"\\";}s:13:\\"toPlaceholder\\";a:7:{s:4:\\"name\\";s:13:\\"toPlaceholder\\";s:4:\\"desc\\";s:30:\\"babel.babellinks.toPlaceholder\\";s:4:\\"type\\";s:9:\\"textfield\\";s:7:\\"options\\";s:0:\\"\\";s:5:\\"value\\";s:0:\\"\\";s:7:\\"lexicon\\";s:16:\\"babel:properties\\";s:4:\\"area\\";s:0:\\"\\";}s:6:\\"sortby\\";a:7:{s:4:\\"name\\";s:6:\\"sortby\\";s:4:\\"desc\\";s:23:\\"babel.babellinks.sortby\\";s:4:\\"type\\";s:9:\\"textfield\\";s:7:\\"options\\";s:0:\\"\\";s:5:\\"value\\";s:5:\\"babel\\";s:7:\\"lexicon\\";s:16:\\"babel:properties\\";s:4:\\"area\\";s:0:\\"\\";}s:7:\\"sortdir\\";a:7:{s:4:\\"name\\";s:7:\\"sortdir\\";s:4:\\"desc\\";s:24:\\"babel.babellinks.sortdir\\";s:4:\\"type\\";s:9:\\"textfield\\";s:7:\\"options\\";s:0:\\"\\";s:5:\\"value\\";s:3:\\"asc\\";s:7:\\"lexicon\\";s:16:\\"babel:properties\\";s:4:\\"area\\";s:0:\\"\\";}}","moduleguid":"","static":0,"static_file":"","content":"\\/**\\n * BabelLinks\\n *\\n * @package babel\\n * @subpackage snippet\\n *\\n * @var modX $modx\\n * @var array $scriptProperties\\n *\\/\\n\\nuse mikrobi\\\\Babel\\\\Snippets\\\\BabelLinks;\\n\\n$corePath = $modx->getOption(\'babel.core_path\', null, $modx->getOption(\'core_path\') . \'components\\/babel\\/\');\\n\\/** @var Babel $babel *\\/\\n$babel = $modx->getService(\'babel\', Babel::class, $corePath . \'model\\/babel\\/\', [\\n    \'core_path\' => $corePath\\n]);\\n\\n$snippet = new BabelLinks($modx, $scriptProperties);\\nif ($snippet instanceof mikrobi\\\\Babel\\\\Snippets\\\\BabelLinks) {\\n    return $snippet->execute();\\n}\\nreturn \'mikrobi\\\\Babel\\\\Snippets\\\\BabelLinks class not found\';"}',
+        'guid' => '771996cbc9f47529d67766f0eaddc579',
+        'native_key' => NULL,
+        'signature' => '5647985a7a3de9b22031d25fd051664d',
+      ),
+      '61ba0983ffc686aefd2648aef6699d9a' => 
+      array (
+        'preserve_keys' => false,
+        'update_object' => true,
+        'unique_key' => 'name',
+        'class' => 'modSnippet',
+        'object' => '{"id":null,"source":0,"property_preprocess":0,"name":"BabelTranslation","description":"Returns the id of a translated resource in a given context.","editor_type":0,"category":0,"cache_type":0,"snippet":"\\/**\\n * BabelTranslation\\n *\\n * @package babel\\n * @subpackage snippet\\n *\\n * @var modX $modx\\n * @var array $scriptProperties\\n *\\/\\n\\nuse mikrobi\\\\Babel\\\\Snippets\\\\BabelTranslation;\\n\\n$corePath = $modx->getOption(\'babel.core_path\', null, $modx->getOption(\'core_path\') . \'components\\/babel\\/\');\\n\\/** @var Babel $babel *\\/\\n$babel = $modx->getService(\'babel\', Babel::class, $corePath . \'model\\/babel\\/\', [\\n    \'core_path\' => $corePath\\n]);\\n\\n$snippet = new BabelTranslation($modx, $scriptProperties);\\nif ($snippet instanceof mikrobi\\\\Babel\\\\Snippets\\\\BabelTranslation) {\\n    return $snippet->execute();\\n}\\nreturn \'mikrobi\\\\Babel\\\\Snippets\\\\BabelTranslation class not found\';","locked":0,"properties":"a:5:{s:10:\\"resourceId\\";a:7:{s:4:\\"name\\";s:10:\\"resourceId\\";s:4:\\"desc\\";s:33:\\"babel.babeltranslation.resourceId\\";s:4:\\"type\\";s:9:\\"textfield\\";s:7:\\"options\\";s:0:\\"\\";s:5:\\"value\\";s:0:\\"\\";s:7:\\"lexicon\\";s:16:\\"babel:properties\\";s:4:\\"area\\";s:0:\\"\\";}s:10:\\"contextKey\\";a:7:{s:4:\\"name\\";s:10:\\"contextKey\\";s:4:\\"desc\\";s:33:\\"babel.babeltranslation.contextKey\\";s:4:\\"type\\";s:9:\\"textfield\\";s:7:\\"options\\";s:0:\\"\\";s:5:\\"value\\";s:0:\\"\\";s:7:\\"lexicon\\";s:16:\\"babel:properties\\";s:4:\\"area\\";s:0:\\"\\";}s:10:\\"cultureKey\\";a:7:{s:4:\\"name\\";s:10:\\"cultureKey\\";s:4:\\"desc\\";s:33:\\"babel.babeltranslation.cultureKey\\";s:4:\\"type\\";s:9:\\"textfield\\";s:7:\\"options\\";s:0:\\"\\";s:5:\\"value\\";s:0:\\"\\";s:7:\\"lexicon\\";s:16:\\"babel:properties\\";s:4:\\"area\\";s:0:\\"\\";}s:15:\\"showUnpublished\\";a:7:{s:4:\\"name\\";s:15:\\"showUnpublished\\";s:4:\\"desc\\";s:38:\\"babel.babeltranslation.showUnpublished\\";s:4:\\"type\\";s:13:\\"combo-boolean\\";s:7:\\"options\\";s:0:\\"\\";s:5:\\"value\\";b:0;s:7:\\"lexicon\\";s:16:\\"babel:properties\\";s:4:\\"area\\";s:0:\\"\\";}s:13:\\"toPlaceholder\\";a:7:{s:4:\\"name\\";s:13:\\"toPlaceholder\\";s:4:\\"desc\\";s:36:\\"babel.babeltranslation.toPlaceholder\\";s:4:\\"type\\";s:9:\\"textfield\\";s:7:\\"options\\";s:0:\\"\\";s:5:\\"value\\";s:0:\\"\\";s:7:\\"lexicon\\";s:16:\\"babel:properties\\";s:4:\\"area\\";s:0:\\"\\";}}","moduleguid":"","static":0,"static_file":"","content":"\\/**\\n * BabelTranslation\\n *\\n * @package babel\\n * @subpackage snippet\\n *\\n * @var modX $modx\\n * @var array $scriptProperties\\n *\\/\\n\\nuse mikrobi\\\\Babel\\\\Snippets\\\\BabelTranslation;\\n\\n$corePath = $modx->getOption(\'babel.core_path\', null, $modx->getOption(\'core_path\') . \'components\\/babel\\/\');\\n\\/** @var Babel $babel *\\/\\n$babel = $modx->getService(\'babel\', Babel::class, $corePath . \'model\\/babel\\/\', [\\n    \'core_path\' => $corePath\\n]);\\n\\n$snippet = new BabelTranslation($modx, $scriptProperties);\\nif ($snippet instanceof mikrobi\\\\Babel\\\\Snippets\\\\BabelTranslation) {\\n    return $snippet->execute();\\n}\\nreturn \'mikrobi\\\\Babel\\\\Snippets\\\\BabelTranslation class not found\';"}',
+        'guid' => 'eb99b027e829870ec2c7840aa250f618',
+        'native_key' => NULL,
+        'signature' => '55d4ab9a9cbc071c300ee8140abc8cad',
+      ),
+    ),
+    'Plugins' => 
+    array (
+      '0da927653e7bfaa68f4f9c1d79195c32' => 
+      array (
+        'unique_key' => 'name',
+        'preserve_keys' => false,
+        'update_object' => true,
+        'related_objects' => 
+        array (
+          'PluginEvents' => 
+          array (
+            '67edbc412bad2fc196b3ee9136991b4c' => 
+            array (
+              'preserve_keys' => true,
+              'update_object' => false,
+              'unique_key' => 
+              array (
+                0 => 'pluginid',
+                1 => 'event',
+              ),
+              'class' => 'modPluginEvent',
+              'object' => '{"pluginid":0,"event":"OnDocFormPrerender","priority":0,"propertyset":0}',
+              'guid' => '758fc379a51588b2611d0ae01b98351a',
+              'native_key' => 
+              array (
+                0 => 0,
+                1 => 'OnDocFormPrerender',
+              ),
+              'signature' => '4147b3eed6b45be066805d62ae6f4571',
+            ),
+            'eb359328f225d4292e0e37e1029b0b29' => 
+            array (
+              'preserve_keys' => true,
+              'update_object' => false,
+              'unique_key' => 
+              array (
+                0 => 'pluginid',
+                1 => 'event',
+              ),
+              'class' => 'modPluginEvent',
+              'object' => '{"pluginid":0,"event":"OnDocFormSave","priority":0,"propertyset":0}',
+              'guid' => 'deb599cbc98d26fadcb7108f6241b8b5',
+              'native_key' => 
+              array (
+                0 => 0,
+                1 => 'OnDocFormSave',
+              ),
+              'signature' => '9840491b722ef7c7f90bdb0ecc5d6b80',
+            ),
+            '1207adb737cd4a7efa7a668e169c9ef7' => 
+            array (
+              'preserve_keys' => true,
+              'update_object' => false,
+              'unique_key' => 
+              array (
+                0 => 'pluginid',
+                1 => 'event',
+              ),
+              'class' => 'modPluginEvent',
+              'object' => '{"pluginid":0,"event":"OnEmptyTrash","priority":0,"propertyset":0}',
+              'guid' => 'facd8e895108a599da57158d84fc8806',
+              'native_key' => 
+              array (
+                0 => 0,
+                1 => 'OnEmptyTrash',
+              ),
+              'signature' => '4880189fe0a17c8affc0264b0a425863',
+            ),
+            'cb8dddfaad43945fa2c81d63a660fb71' => 
+            array (
+              'preserve_keys' => true,
+              'update_object' => false,
+              'unique_key' => 
+              array (
+                0 => 'pluginid',
+                1 => 'event',
+              ),
+              'class' => 'modPluginEvent',
+              'object' => '{"pluginid":0,"event":"OnContextRemove","priority":0,"propertyset":0}',
+              'guid' => '73ca63331a00b3fb9725f757a1f70198',
+              'native_key' => 
+              array (
+                0 => 0,
+                1 => 'OnContextRemove',
+              ),
+              'signature' => '8f6ab0564660ee4c87fed03cea86daeb',
+            ),
+            'e7a9606ad97d106dce137d8d0c14b198' => 
+            array (
+              'preserve_keys' => true,
+              'update_object' => false,
+              'unique_key' => 
+              array (
+                0 => 'pluginid',
+                1 => 'event',
+              ),
+              'class' => 'modPluginEvent',
+              'object' => '{"pluginid":0,"event":"OnContextSave","priority":0,"propertyset":0}',
+              'guid' => '5049b0cddfe1e0216e296d8794924de4',
+              'native_key' => 
+              array (
+                0 => 0,
+                1 => 'OnContextSave',
+              ),
+              'signature' => 'e72f00a638d7fdee3acca3bcb1fda323',
+            ),
+            '91082bb1fd4388e1d796efcac570117e' => 
+            array (
+              'preserve_keys' => true,
+              'update_object' => false,
+              'unique_key' => 
+              array (
+                0 => 'pluginid',
+                1 => 'event',
+              ),
+              'class' => 'modPluginEvent',
+              'object' => '{"pluginid":0,"event":"OnResourceDuplicate","priority":0,"propertyset":0}',
+              'guid' => 'b542552af7448e0dadbc23ad5fad6f93',
+              'native_key' => 
+              array (
+                0 => 0,
+                1 => 'OnResourceDuplicate',
+              ),
+              'signature' => '151350adcc930e093b6d4003037f3ebb',
+            ),
+            '3aac47034a43adbf7462abbd0dc3de4f' => 
+            array (
+              'preserve_keys' => true,
+              'update_object' => false,
+              'unique_key' => 
+              array (
+                0 => 'pluginid',
+                1 => 'event',
+              ),
+              'class' => 'modPluginEvent',
+              'object' => '{"pluginid":0,"event":"OnResourceSort","priority":0,"propertyset":0}',
+              'guid' => 'd2c16eaaba2af469eb31b2a3946dbaee',
+              'native_key' => 
+              array (
+                0 => 0,
+                1 => 'OnResourceSort',
+              ),
+              'signature' => 'e26ddb7ff8376b586a6b8e0071b199e5',
+            ),
+            '11aa7bb6fb83dc16d8cad4f5b5da0681' => 
+            array (
+              'preserve_keys' => true,
+              'update_object' => false,
+              'unique_key' => 
+              array (
+                0 => 'pluginid',
+                1 => 'event',
+              ),
+              'class' => 'modPluginEvent',
+              'object' => '{"pluginid":0,"event":"OnSiteRefresh","priority":0,"propertyset":0}',
+              'guid' => 'bc260ceae3efe7554f3787939dd0126b',
+              'native_key' => 
+              array (
+                0 => 0,
+                1 => 'OnSiteRefresh',
+              ),
+              'signature' => '8735b31794941b6ecfce11620f13ab5f',
+            ),
+          ),
+        ),
+        'related_object_attributes' => 
+        array (
+          'PluginEvents' => 
+          array (
+            'preserve_keys' => true,
+            'update_object' => false,
+            'unique_key' => 
+            array (
+              0 => 'pluginid',
+              1 => 'event',
+            ),
+          ),
+        ),
+        'class' => 'modPlugin',
+        'object' => '{"id":null,"source":0,"property_preprocess":0,"name":"Babel","description":"Links and synchronizes multilingual resources.","editor_type":0,"category":0,"cache_type":0,"plugincode":"\\/**\\n * Babel Plugin\\n *\\n * @package babel\\n * @subpackage plugin\\n *\\n * @var modX $modx\\n * @var array $scriptProperties\\n *\\/\\n\\n$className = \'mikrobi\\\\Babel\\\\Plugins\\\\Events\\\\\\\\\' . $modx->event->name;\\n\\n$corePath = $modx->getOption(\'babel.core_path\', null, $modx->getOption(\'core_path\') . \'components\\/babel\\/\');\\n\\/** @var Babel $babel *\\/\\n$babel = $modx->getService(\'babel\', Babel::class, $corePath . \'model\\/babel\\/\', [\\n    \'core_path\' => $corePath\\n]);\\n\\nif ($babel) {\\n    if (class_exists($className)) {\\n        $handler = new $className($modx, $scriptProperties);\\n        if (get_class($handler) == $className) {\\n            $handler->run();\\n        } else {\\n            $modx->log(xPDO::LOG_LEVEL_ERROR, $className . \' could not be initialized!\', \'\', \'Babel Plugin\');\\n        }\\n    } else {\\n        $modx->log(xPDO::LOG_LEVEL_ERROR, $className . \' was not found!\', \'\', \'Babel Plugin\');\\n    }\\n}\\n\\nreturn;","locked":0,"properties":"a:0:{}","disabled":0,"moduleguid":"","static":0,"static_file":"","content":"\\/**\\n * Babel Plugin\\n *\\n * @package babel\\n * @subpackage plugin\\n *\\n * @var modX $modx\\n * @var array $scriptProperties\\n *\\/\\n\\n$className = \'mikrobi\\\\Babel\\\\Plugins\\\\Events\\\\\\\\\' . $modx->event->name;\\n\\n$corePath = $modx->getOption(\'babel.core_path\', null, $modx->getOption(\'core_path\') . \'components\\/babel\\/\');\\n\\/** @var Babel $babel *\\/\\n$babel = $modx->getService(\'babel\', Babel::class, $corePath . \'model\\/babel\\/\', [\\n    \'core_path\' => $corePath\\n]);\\n\\nif ($babel) {\\n    if (class_exists($className)) {\\n        $handler = new $className($modx, $scriptProperties);\\n        if (get_class($handler) == $className) {\\n            $handler->run();\\n        } else {\\n            $modx->log(xPDO::LOG_LEVEL_ERROR, $className . \' could not be initialized!\', \'\', \'Babel Plugin\');\\n        }\\n    } else {\\n        $modx->log(xPDO::LOG_LEVEL_ERROR, $className . \' was not found!\', \'\', \'Babel Plugin\');\\n    }\\n}\\n\\nreturn;"}',
+        'guid' => '7436cbd8b5db48d9bae0085e3ff63014',
+        'native_key' => NULL,
+        'signature' => 'f786c7cd3e1f38af1138e3db9f68e160',
+      ),
+    ),
+  ),
+  'related_object_attributes' => 
+  array (
+    'Children' => 
+    array (
+      'preserve_keys' => false,
+      'update_object' => true,
+      'unique_key' => 
+      array (
+        0 => 'parent',
+        1 => 'category',
+      ),
+    ),
+    'Snippets' => 
+    array (
+      'preserve_keys' => false,
+      'update_object' => true,
+      'unique_key' => 'name',
+    ),
+    'Chunks' => 
+    array (
+      'preserve_keys' => false,
+      'update_object' => true,
+      'unique_key' => 'name',
+    ),
+    'Templates' => 
+    array (
+      'preserve_keys' => false,
+      'update_object' => true,
+      'unique_key' => 'templatename',
+    ),
+    'TemplateVars' => 
+    array (
+      'preserve_keys' => false,
+      'update_object' => true,
+      'unique_key' => 'name',
+    ),
+    'Plugins' => 
+    array (
+      'unique_key' => 'name',
+      'preserve_keys' => false,
+      'update_object' => true,
+      'related_objects' => true,
+      'related_object_attributes' => 
+      array (
+        'PluginEvents' => 
+        array (
+          'preserve_keys' => true,
+          'update_object' => false,
+          'unique_key' => 
+          array (
+            0 => 'pluginid',
+            1 => 'event',
+          ),
+        ),
+      ),
+    ),
+  ),
+  'namespace' => 'babel',
+  'resolve' => 
+  array (
+    0 => 
+    array (
+      'type' => 'file',
+      'body' => '{"source":"babel-3.5.7-pl\\/modCategory\\/22b017bdae1fb8cf685bad1acac5761a\\/0\\/","target":"return MODX_ASSETS_PATH . \'components\\/\';","name":"babel"}',
+    ),
+    1 => 
+    array (
+      'type' => 'file',
+      'body' => '{"source":"babel-3.5.7-pl\\/modCategory\\/22b017bdae1fb8cf685bad1acac5761a\\/1\\/","target":"return MODX_CORE_PATH . \'components\\/\';","name":"babel"}',
+    ),
+    2 => 
+    array (
+      'type' => 'php',
+      'body' => '{"source":"babel-3.5.7-pl\\/modCategory\\/22b017bdae1fb8cf685bad1acac5761a.resolve.setupoptions.resolver","type":"php","name":"resolve.setupoptions"}',
+    ),
+    3 => 
+    array (
+      'type' => 'php',
+      'body' => '{"source":"babel-3.5.7-pl\\/modCategory\\/22b017bdae1fb8cf685bad1acac5761a.resolve.permissions.resolver","type":"php","name":"resolve.permissions"}',
+    ),
+    4 => 
+    array (
+      'type' => 'php',
+      'body' => '{"source":"babel-3.5.7-pl\\/modCategory\\/22b017bdae1fb8cf685bad1acac5761a.resolve.babelevents.resolver","type":"php","name":"resolve.babelevents"}',
+    ),
+    5 => 
+    array (
+      'type' => 'php',
+      'body' => '{"source":"babel-3.5.7-pl\\/modCategory\\/22b017bdae1fb8cf685bad1acac5761a.resolve.treehillstudio.resolver","type":"php","name":"resolve.treehillstudio"}',
+    ),
+  ),
+  'validate' => NULL,
+  'vehicle_package' => 'transport',
+  'vehicle_class' => 'xPDOObjectVehicle',
+  'guid' => 'f8fd82301b8d1650010e52de1525130b',
+  'package' => 'modx',
+  'class' => 'modCategory',
+  'signature' => '22b017bdae1fb8cf685bad1acac5761a',
+  'native_key' => NULL,
+  'object' => '{"id":null,"parent":0,"category":"Babel","rank":0}',
+);

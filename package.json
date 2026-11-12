@@ -8,7 +8,8 @@
     "html": "node tools/build-html.mjs",
     "watch": "sass --watch src/scss/main.scss assets/css/main.css",
     "watch:html": "node --watch-path=src/html tools/build-html.mjs",
-    "i18n:check": "node tools/build-html.mjs --strict"
+    "i18n:check": "node tools/build-html.mjs --strict",
+    "modx:assets": "npm run css && node tools/sync-modx-assets.mjs"
   },
   "repository": {
     "type": "git",

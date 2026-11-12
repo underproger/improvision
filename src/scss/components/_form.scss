@@ -128,3 +128,12 @@
     }
   }
 }
+
+// Honeypot field for bots (MODX version): kept in the form, hidden from people
+.form__hp {
+  position: absolute;
+  left: -10000px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}

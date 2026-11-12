@@ -1,0 +1,14 @@
+@use '../base/variables' as *;
+
+// Text page (MODX template «Текстова сторінка»): privacy policy, terms, 404
+.text-page {
+  padding: 10px 0 100px;
+
+  .prose {
+    max-width: 820px;
+  }
+
+  @include down(md) {
+    padding-bottom: 64px;
+  }
+}

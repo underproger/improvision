@@ -1,0 +1,16 @@
+<?php return array (
+  'unique_key' => 'key',
+  'preserve_keys' => true,
+  'update_object' => false,
+  'namespace' => 'babel',
+  'resolve' => NULL,
+  'validate' => NULL,
+  'vehicle_package' => 'transport',
+  'vehicle_class' => 'xPDOObjectVehicle',
+  'guid' => '744b39fa3e52bd685fb49972c96d3482',
+  'package' => 'modx',
+  'class' => 'modSystemSetting',
+  'signature' => '5fe927fdbda07e85626cb6241b5cdd8b',
+  'native_key' => 'babel.displayChunk',
+  'object' => '{"key":"babel.displayChunk","value":"tplBabelContextMenu","xtype":"textfield","namespace":"babel","area":"system","editedon":null}',
+);
