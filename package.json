@@ -7,7 +7,8 @@
     "css": "sass src/scss/main.scss assets/css/main.css --style=compressed --no-source-map",
     "html": "node tools/build-html.mjs",
     "watch": "sass --watch src/scss/main.scss assets/css/main.css",
-    "watch:html": "node --watch-path=src/html tools/build-html.mjs"
+    "watch:html": "node --watch-path=src/html tools/build-html.mjs",
+    "i18n:check": "node tools/build-html.mjs --strict"
   },
   "repository": {
     "type": "git",
@@ -19,6 +20,7 @@
   "homepage": "https://github.com/underproger/improvision#readme",
   "devDependencies": {
     "@fontsource-variable/manrope": "^5.3.0",
+    "node-html-parser": "^9.0.7",
     "sass": "^1.108.2"
   },
   "private": true

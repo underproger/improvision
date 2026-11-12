@@ -2,6 +2,40 @@
 (() => {
   'use strict';
 
+  /* ------------------------------------------------------------------
+   * UI strings (page language comes from <html lang>)
+   * ---------------------------------------------------------------- */
+  const STRINGS = {
+    uk: {
+      menuOpen: 'Відкрити меню',
+      menuClose: 'Закрити меню',
+      page: (n, total) => `Сторінка ${n} з ${total}`,
+      shown: (n) => `Показано: <b>${n}</b>`,
+      formInvalid: 'Будь ласка, заповніть імʼя та коректний номер телефону.',
+      formOk: 'Дякуємо! Заявку надіслано — ми звʼяжемося з вами протягом робочого дня.',
+      formFail: 'Не вдалося надіслати заявку. Спробуйте ще раз або зателефонуйте нам.',
+    },
+    en: {
+      menuOpen: 'Open menu',
+      menuClose: 'Close menu',
+      page: (n, total) => `Page ${n} of ${total}`,
+      shown: (n) => `Showing <b>${n}</b>`,
+      formInvalid: 'Please enter your name and a valid phone number.',
+      formOk: 'Thank you! Your request has been sent — we’ll get back to you within one business day.',
+      formFail: 'Your request could not be sent. Please try again or give us a call.',
+    },
+    ru: {
+      menuOpen: 'Открыть меню',
+      menuClose: 'Закрыть меню',
+      page: (n, total) => `Страница ${n} из ${total}`,
+      shown: (n) => `Показано: <b>${n}</b>`,
+      formInvalid: 'Пожалуйста, укажите имя и корректный номер телефона.',
+      formOk: 'Спасибо! Заявка отправлена — мы свяжемся с вами в течение рабочего дня.',
+      formFail: 'Не удалось отправить заявку. Попробуйте ещё раз или позвоните нам.',
+    },
+  };
+  const T = STRINGS[(document.documentElement.lang || 'uk').slice(0, 2)] || STRINGS.uk;
+
   const $ = (sel, ctx = document) => ctx.querySelector(sel);
   const $$ = (sel, ctx = document) => Array.from(ctx.querySelectorAll(sel));
   const mqDesktop = window.matchMedia('(min-width: 1200px)');
@@ -182,7 +216,7 @@
     header && header.classList.toggle('is-menu-open', open);
     document.body.classList.toggle('is-locked', open);
     burger.setAttribute('aria-expanded', String(open));
-    burger.setAttribute('aria-label', open ? 'Закрити меню' : 'Відкрити меню');
+    burger.setAttribute('aria-label', open ? T.menuClose : T.menuOpen);
   };
 
   if (burger && nav) {
@@ -226,7 +260,7 @@
         const dot = document.createElement('button');
         dot.type = 'button';
         dot.className = 'slider__dot';
-        dot.setAttribute('aria-label', `Сторінка ${i + 1} з ${pages}`);
+        dot.setAttribute('aria-label', T.page(i + 1, pages));
         dot.addEventListener('click', () => {
           const max = track.scrollWidth - track.clientWidth;
           track.scrollTo({ left: Math.min(max, i * track.clientWidth), behavior: 'smooth' });
@@ -362,7 +396,7 @@
       });
       if (empty) empty.hidden = visible > 0;
       if (counter) {
-        counter.innerHTML = value === 'all' ? counterInitial : `Показано: <b>${visible}</b>`;
+        counter.innerHTML = value === 'all' ? counterInitial : T.shown(visible);
       }
     });
   }
@@ -468,7 +502,7 @@
     btn.addEventListener('click', () => {
       const select = $('#lead-form [data-select]');
       if (!select) return;
-      const option = Array.from(select.options).find((o) => o.text.startsWith('Виїзд'));
+      const option = select.querySelector('[data-visit-option]');
       if (option) {
         select.value = option.value || option.text;
         select.dispatchEvent(new Event('change'));
@@ -563,7 +597,7 @@
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       if (!validate()) {
-        showStatus('Будь ласка, заповніть імʼя та коректний номер телефону.', true);
+        showStatus(T.formInvalid, true);
         const first = $('.is-invalid', form);
         if (first) first.focus();
         return;
@@ -579,9 +613,9 @@
         }
         form.reset();
         $$('[data-select]', form).forEach((s) => s.classList.add('is-placeholder'));
-        showStatus('Дякуємо! Заявку надіслано — ми звʼяжемося з вами протягом робочого дня.');
+        showStatus(T.formOk);
       } catch (err) {
-        showStatus('Не вдалося надіслати заявку. Спробуйте ще раз або зателефонуйте нам.', true);
+        showStatus(T.formFail, true);
       } finally {
         if (btn) btn.disabled = false;
       }

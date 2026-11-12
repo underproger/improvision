@@ -8,10 +8,12 @@
 |---|---|
 | `index.html` | Главная |
 | `about.html` | Про нас |
-| `service-facades.html` | Услуга (шаблон) |
 | `projects.html` / `project.html` | Проекты / проект (шаблон) |
 | `blog.html` / `article.html` | Блог / статья (шаблон) |
 | `contact.html` | Контакты |
+| `service-*.html` | 7 услуг: construction, facades, entrance, outdoor, interior, design, renovation |
+
+Языки: украинский — в корне, английский — `/en/`, русский — `/ru/` (те же имена файлов).
 
 ## Структура
 
@@ -41,6 +43,7 @@ npm run css          # только SCSS → assets/css/main.css
 npm run html         # только src/html → *.html
 npm run watch        # пересборка CSS при изменениях
 npm run watch:html   # пересборка HTML при изменениях
+npm run i18n:check   # проверить, что всё переведено
 ```
 
 В исходниках страниц:
@@ -50,6 +53,21 @@ npm run watch:html   # пересборка HTML при изменениях
 <!-- @include contact -->                                          общий блок
 {{icon:arrow}}                                                     инлайн-иконка из src/html/icons
 ```
+
+## Переводы (EN, RU)
+
+Украинский — исходник. `/en/` и `/ru/` собираются из тех же шаблонов `src/html`:
+каждая текстовая строка (а также `alt`, `title`, `placeholder`, `aria-label`, meta description/og, строки JSON-LD)
+ищется в словаре `src/i18n/en.json` / `src/i18n/ru.json` по точному украинскому тексту.
+
+- Ключ — украинский текст фрагмента вместе с простыми inline-тегами (`<br>`, `<b>`, `<small>`, `<sup>`…),
+  поэтому в переводе можно оставить или переставить переносы.
+- Если строки нет в словаре, на странице остаётся украинский текст, а сборка пишет список в
+  `src/i18n/missing.en.json` / `missing.ru.json` — достаточно перенести оттуда ключи в словарь с переводом.
+- `npm run i18n:check` — сборка падает, если есть непереведённые строки.
+- Пути (`assets/` → `../assets/`), `canonical`, `og:url`, `hreflang`, `lang`, переключатель языков — проставляются автоматически.
+- Тексты из JS (меню, форма, счётчик) — объект `STRINGS` в `assets/js/main.js`.
+- Заголовок на странице услуги автоматически уменьшается, если название длинное (на любом языке).
 
 ## Анимации
 
