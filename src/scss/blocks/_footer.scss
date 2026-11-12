@@ -66,6 +66,30 @@
     }
   }
 
+  // Developer credit — sits at the bottom of the first column
+  &__dev {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: auto;
+    padding-top: 28px;
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 600;
+    color: $c-muted;
+    transition: color 0.2s;
+
+    svg {
+      flex: none;
+      width: 31px;
+      height: 24px;
+    }
+
+    @include hover {
+      color: $c-white;
+    }
+  }
+
   // Column 2
   &__contacts {
     display: grid;
