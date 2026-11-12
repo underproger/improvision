@@ -16,9 +16,11 @@
   <meta property="og:url" content="https://improvision.com.ua/">
   <meta property="og:image" content="https://improvision.com.ua/assets/img/photos/hero.jpg">
 
+  <link rel="preload" as="image" href="assets/img/photos/hero.jpg" imagesrcset="assets/img/photos/hero-960.jpg 960w, assets/img/photos/hero.jpg 1908w" imagesizes="100vw" fetchpriority="high">
   <link rel="preload" href="assets/fonts/manrope-cyrillic-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preload" href="assets/img/photos/hero.jpg" as="image" fetchpriority="high">
   <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="icon" href="assets/icons/favicon.svg" type="image/svg+xml">
+  <script>document.documentElement.classList.add('js');</script>
 
   <script type="application/ld+json">
   {
@@ -93,8 +95,8 @@
 
   <!-- ============================== HERO ============================== -->
   <section class="hero">
-    <img class="hero__bg" src="assets/img/photos/hero.jpg" width="1908" height="842" alt="" fetchpriority="high" decoding="async">
-    <div class="container">
+    <img class="hero__bg" src="assets/img/photos/hero.jpg" srcset="assets/img/photos/hero-960.jpg 960w, assets/img/photos/hero.jpg 1908w" sizes="100vw" width="1908" height="842" alt="" fetchpriority="high">
+    <div class="container" data-stagger>
       <h1 class="hero__title">Будуємо та брендуємо<br class="br-desk"> комерційні простори<br class="br-desk"> під&nbsp;ключ</h1>
       <p class="hero__text">Повний цикл — від проєкту й фасаду до реклами та здачі об'єкта. Понад 15 років реалізуємо магазини, ресторани та бізнес-центри для провідних брендів.</p>
       <div class="hero__actions">
@@ -112,9 +114,9 @@
   <!-- ============================== BRANDS ============================== -->
   <section class="brands" aria-labelledby="brands-title">
     <div class="container">
-      <h2 class="brands__title" id="brands-title">Нам довіряють провідні бренди</h2>
+      <h2 class="brands__title" id="brands-title" data-reveal="fade">Нам довіряють провідні бренди</h2>
       <div class="brands__slider" data-slider="dots">
-        <ul class="slider__track brands__track" data-slider-track>
+        <ul class="slider__track brands__track" data-slider-track data-stagger="fade">
           <li class="brands__item"><img src="assets/img/brands/arbat.svg" width="154" height="37" alt="Арбат Престиж" loading="lazy"></li>
           <li class="brands__item"><img src="assets/img/brands/baldessarini.svg" width="141" height="45" alt="Baldessarini Hugo Boss" loading="lazy"></li>
           <li class="brands__item"><img src="assets/img/brands/calzedonia.svg" width="159" height="17" alt="Calzedonia" loading="lazy"></li>
@@ -126,17 +128,16 @@
       </div>
     </div>
   </section>
-
   <!-- ============================== ABOUT ============================== -->
   <section class="about" aria-labelledby="about-title">
     <div class="container about__grid">
-      <div class="about__content">
+      <div class="about__content" data-stagger>
         <h2 class="title" id="about-title">Один підрядник<br> на весь об'єкт</h2>
         <p class="about__lead">Improvision — це команда, що бере комерційний об'єкт від ідеї до відкриття. Ми проєктуємо, виготовляємо у власному цеху та монтуємо все, що робить простір готовим до роботи: фасади, вхідні групи, рекламу та оздоблення.</p>
         <p>Такий підхід прибирає стики між підрядниками, скорочує строки та закріплює єдину відповідальність за результат</p>
         <a class="btn btn--outline" href="#services">Наші послуги<svg class="icon" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M.5 11.5 11.5.5M5.5.5h6v6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
-      <ul class="about__cards">
+      <ul class="about__cards" data-stagger>
         <li class="step-card">
           <img class="step-card__icon" src="assets/icons/ic-design.svg" width="47" height="47" alt="" loading="lazy">
           <h3 class="step-card__title">Проєктування</h3>
@@ -164,12 +165,12 @@
   <!-- ============================== SERVICES ============================== -->
   <section class="services" id="services" aria-labelledby="services-title">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head" data-stagger>
         <h2 class="title" id="services-title">Напрямки робіт — від<br class="br-desk"> фасаду до вивіски</h2>
         <a class="btn btn--outline" href="#contact">Отримати консультацію<svg class="icon" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M.5 11.5 11.5.5M5.5.5h6v6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
       <div class="services__slider" data-slider="progress">
-        <div class="slider__track services__track" data-slider-track>
+        <div class="slider__track services__track" data-slider-track data-stagger="right">
           <article class="service-card">
             <a class="service-card__link" href="service-facades.html">
               <img class="service-card__img" src="assets/img/photos/service-facades.jpg" width="900" height="496" alt="" loading="lazy" draggable="false">
@@ -235,8 +236,8 @@
   <section class="why" aria-labelledby="why-title">
     <img class="why__bg" src="assets/img/photos/why-bg.jpg" width="1920" height="1080" alt="" loading="lazy">
     <div class="container why__grid">
-      <h2 class="title title--light" id="why-title">Причини, за якими<br class="br-desk"> нас обирають</h2>
-      <ul class="why__list">
+      <h2 class="title title--light" id="why-title" data-reveal>Причини, за якими<br class="br-desk"> нас обирають</h2>
+      <ul class="why__list" data-stagger>
         <li class="why-card">
           <span class="why-card__num" aria-hidden="true">01</span>
           <h3 class="why-card__title">Повний цикл «під&nbsp;ключ»</h3>
@@ -270,22 +271,21 @@
       </ul>
     </div>
   </section>
-
   <!-- ============================== PROJECTS ============================== -->
   <section class="projects" aria-labelledby="projects-title">
     <div class="container">
-      <div class="section-head">
+      <div class="section-head" data-stagger>
         <h2 class="title" id="projects-title">Вибрані роботи</h2>
         <a class="btn btn--outline" href="projects.html">Усі проєкти<svg class="icon" viewBox="0 0 12 12" aria-hidden="true" focusable="false"><path d="M.5 11.5 11.5.5M5.5.5h6v6" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
-      <div class="projects__filters" role="group" aria-label="Фільтр проєктів" data-filters>
+      <div class="projects__filters" role="group" aria-label="Фільтр проєктів" data-filters data-reveal="fade">
         <button class="chip chip--all is-active" type="button" data-filter="all" aria-pressed="true">Усі</button>
         <button class="chip" type="button" data-filter="retail" aria-pressed="false">Ритейл</button>
         <button class="chip" type="button" data-filter="restaurants" aria-pressed="false">Ресторани</button>
         <button class="chip" type="button" data-filter="facades" aria-pressed="false">Фасади</button>
         <button class="chip chip--wide" type="button" data-filter="business" aria-pressed="false">Бізнес-центри</button>
       </div>
-      <div class="projects__grid" data-filter-grid>
+      <div class="projects__grid" data-filter-grid data-stagger>
         <article class="project-card" data-category="restaurants">
           <a class="project-card__link" href="project.html">
             <div class="project-card__media">
@@ -374,26 +374,26 @@
     <div class="container">
       <img class="stats__deco" src="assets/icons/deco-mark.svg" width="427" height="427" alt="" aria-hidden="true">
       <div class="stats__grid">
-        <div class="stats__intro">
+        <div class="stats__intro" data-stagger>
           <h2 class="title title--light" id="stats-title">Досвід, який<br> говорить за нас</h2>
           <p class="stats__text">15+ років створюємо та реалізуємо комерційні простори — від окремих фасадних рішень до комплексних об’єктів. За нашими проєктами — сотні реалізованих об’єктів, сильна команда та тисячі квадратних метрів втілених рішень.</p>
         </div>
-        <dl class="stats__list">
+        <dl class="stats__list" data-stagger>
           <div class="stats__item">
             <dt class="stats__label">Реалізованих<br> проєктів</dt>
-            <dd class="stats__value">480+</dd>
+            <dd class="stats__value"><span data-count="480">480</span>+</dd>
           </div>
           <div class="stats__item">
             <dt class="stats__label">Років<br> досвіду</dt>
-            <dd class="stats__value">15+</dd>
+            <dd class="stats__value"><span data-count="15">15</span>+</dd>
           </div>
           <div class="stats__item">
             <dt class="stats__label">Фахівців<br> у команді</dt>
-            <dd class="stats__value">40</dd>
+            <dd class="stats__value"><span data-count="40">40</span></dd>
           </div>
           <div class="stats__item">
             <dt class="stats__label">Змонтованих<br> фасадів</dt>
-            <dd class="stats__value">120 <small>тис.м<sup>2</sup></small></dd>
+            <dd class="stats__value"><span data-count="120">120</span> <small>тис.м<sup>2</sup></small></dd>
           </div>
         </dl>
       </div>
@@ -404,10 +404,10 @@
   <section class="contact" id="contact" aria-labelledby="contact-title">
     <div class="container contact__container">
       <div class="contact__grid">
-        <div class="contact__media">
+        <div class="contact__media" data-reveal="left">
           <img src="assets/img/photos/project-calzedonia.jpg" width="800" height="450" alt="Вивіска Calzedonia — проєкт improvision" loading="lazy">
         </div>
-        <div class="contact__body">
+        <div class="contact__body" data-stagger>
           <h2 class="title" id="contact-title">Обговоримо ваш проєкт?</h2>
           <p class="contact__text">Залиште заявку — ми зв'яжемося протягом робочого дня, уточнимо задачу та підготуємо орієнтовний розрахунок.</p>
           <form class="form" action="#" method="post" novalidate data-form>
@@ -451,7 +451,6 @@
       </div>
     </div>
   </section>
-
 </main>
 
 <!-- ============================== FOOTER ============================== -->

@@ -2,36 +2,56 @@
 
 Статическая вёрстка сайта improvision (HTML + SCSS + vanilla JS) по макетам Figma, десктоп 1440.
 
+Готово: `index.html` (главная), `about.html` (Про нас).
+
 ## Структура
 
 ```
-index.html                 главная
+index.html, about.html     собранные страницы (не править руками — см. src/html)
 assets/
   css/main.css             собранный CSS (не править руками)
-  js/main.js               header, меню, дропдауны, слайдеры, фильтр проектов, маска телефона, форма
+  js/main.js               header, меню, дропдауны, слайдеры, фильтр, табы, анимации, маска телефона, форма
   fonts/                   Manrope Variable (woff2, self-hosted)
-  icons/                   SVG-иконки и логотип (вытащены из макета)
+  icons/                   SVG-иконки, логотип, фавикон
   img/brands/              логотипы брендов (SVG)
   img/photos/              фото
-src/scss/
-  main.scss                точка входа
-  base/                    переменные, шрифты, reset, базовые стили (.container, .title)
-  components/              кнопки/чипы, слайдер, поля формы
-  blocks/                  блоки страницы: header, hero, brands, about, services, why, projects, stats, contact, footer
+src/
+  html/pages/              исходники страниц
+  html/partials/           общие блоки: header, footer, contact, brands, why, steps, stats-items, head-assets
+  html/icons/              инлайн-SVG для {{icon:name}}
+  scss/                    base / components / blocks
+tools/build-html.mjs       сборка HTML (include партиалов, без зависимостей)
 ```
 
 ## Сборка
 
 ```bash
 npm install
-npm run build     # src/scss → assets/css/main.css (minified)
-npm run watch     # пересборка при изменениях
+npm run build        # CSS + HTML
+npm run css          # только SCSS → assets/css/main.css
+npm run html         # только src/html → *.html
+npm run watch        # пересборка CSS при изменениях
+npm run watch:html   # пересборка HTML при изменениях
 ```
+
+В исходниках страниц:
+
+```html
+<!-- @include header {"solid": true, "current": "about.html"} -->   белый хедер + активный пункт меню
+<!-- @include contact -->                                          общий блок
+{{icon:arrow}}                                                     инлайн-иконка из src/html/icons
+```
+
+## Анимации
+
+- `data-reveal` — элемент появляется при скролле (`fade`, `left`, `right`, `zoom`; по умолчанию снизу вверх).
+- `data-stagger` — дочерние элементы появляются по очереди.
+- `data-count="480"` — счётчик чисел.
+- Без JS и при `prefers-reduced-motion` всё показывается сразу.
 
 ## Заметки
 
 - Брейкпоинты: 1199 / 991 / 767 / 575 (desktop-first, миксины `down()` / `up()` в `_variables.scss`).
-- Хедер прозрачный на hero и белеет при скролле. Для внутренних страниц добавить `data-header-solid` на `<header>`.
-- Слайдеры работают на нативном scroll-snap (тач/трекпад), мышью тянутся drag'ом. Точки у брендов появляются, когда логотипы не влезают в одну ширину.
+- Хедер прозрачный на hero и белеет при скролле; на внутренних страницах — `{"solid": true}`.
 - Форма: валидация на фронте; для отправки указать `data-endpoint="..."` у `<form>`.
-- Ссылки на внутренние страницы (about.html, projects.html, service-*.html и т.д.) ведут на будущие файлы.
+- «Шлях компанії»: для 2013–2026 стоят заглушки (подписи + фото), нужен контент.

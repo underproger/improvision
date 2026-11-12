@@ -1,0 +1,262 @@
+@use '../base/variables' as *;
+
+// ==========================================================================
+// About page blocks
+// ==========================================================================
+
+// ---- Intro: text + photo in the "p" brand mark ----
+.about-intro {
+  padding: 100px 0 102px;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 505px) minmax(0, 454px);
+    justify-content: space-between;
+    align-items: start;
+    gap: 48px;
+    max-width: 1069px;
+    margin-inline: auto;
+  }
+
+  &__content {
+    padding-top: 3px;
+
+    .title {
+      margin-bottom: 32px;
+    }
+
+    p + p {
+      margin-top: 20px;
+    }
+  }
+
+  &__lead {
+    font-weight: 600;
+  }
+
+  &__mark svg {
+    width: 100%;
+    height: auto;
+  }
+
+  @include down(lg) {
+    &__grid {
+      grid-template-columns: 1fr;
+      max-width: 640px;
+    }
+
+    &__mark {
+      width: min(100%, 360px);
+      margin-inline: auto;
+    }
+  }
+
+  @include down(md) {
+    padding: var(--section-y) 0;
+  }
+}
+
+// ---- Process: 4 step cards in a row ----
+.process {
+  padding: 98px 0 100px;
+
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+  }
+
+  @include down(xl) {
+    &__cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  @include down(md) {
+    padding: var(--section-y) 0;
+
+    &__cards {
+      gap: 16px;
+      margin-top: 24px;
+    }
+  }
+
+  @include down(sm) {
+    &__cards {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+// ---- History timeline ----
+.history {
+  padding: 98px 0;
+  overflow: hidden;
+
+  &__body {
+    text-align: center;
+  }
+
+  &__year {
+    margin-top: 25px;
+    font-size: clamp(4rem, 2rem + 6.5vw, 7.5rem);
+    line-height: 1;
+    font-weight: 800;
+    color: $c-line;
+    user-select: none;
+  }
+
+  &__media {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 500px));
+    justify-content: center;
+    gap: 10px;
+    margin-top: 2px;
+
+    img {
+      width: 100%;
+      aspect-ratio: 500 / 278;
+      object-fit: cover;
+
+      &.is-right {
+        object-position: right center;
+      }
+    }
+  }
+
+  &__caption {
+    margin-top: 32px;
+    font-weight: 600;
+  }
+
+  &__tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 13px;
+    margin-top: 47px;
+  }
+
+  &__tab {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 122px;
+    height: 42px;
+    border: 1px solid $c-text;
+    font-size: 12px;
+    line-height: 1;
+    text-transform: uppercase;
+    color: $c-text;
+    transition:
+      background-color 0.2s,
+      border-color 0.2s,
+      color 0.2s;
+
+    @include hover {
+      border-color: $c-blue;
+      color: $c-blue;
+    }
+
+    &.is-active {
+      background: $c-blue;
+      border-color: $c-blue;
+      color: $c-white;
+      font-weight: 700;
+    }
+
+    &--soon {
+      border: 1px dashed $c-muted;
+      color: $c-muted;
+      cursor: default;
+    }
+  }
+
+  @include down(md) {
+    padding: var(--section-y) 0;
+
+    &__media {
+      grid-template-columns: 1fr;
+    }
+
+    &__tabs {
+      gap: 8px;
+      margin-top: 32px;
+    }
+
+    &__tab {
+      width: auto;
+      min-width: 76px;
+      height: 40px;
+      padding: 0 14px;
+    }
+  }
+}
+
+// ---- Team ----
+.team {
+  padding: 93px 0 120px;
+  border-top: 1px solid $c-line;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 650px);
+    gap: 48px 60px;
+  }
+
+  &__text {
+    max-width: 470px;
+    margin-top: 22px;
+    font-weight: 600;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: 50px;
+  }
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    padding: 21px 30px 49px;
+
+    &:nth-child(n + 3) {
+      padding: 42px 30px 0;
+      border-top: 1px solid $c-line;
+    }
+  }
+
+  &__label {
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 600;
+  }
+
+  &__value {
+    margin-top: 4px;
+    font-size: clamp(3rem, 2rem + 3vw, 4.6875rem);
+    line-height: 1;
+    color: $c-blue;
+  }
+
+  @include down(xl) {
+    &__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @include down(md) {
+    padding: var(--section-y) 0;
+
+    &__list {
+      column-gap: 20px;
+    }
+
+    &__item,
+    &__item:nth-child(n + 3) {
+      padding: 20px 0 28px;
+    }
+  }
+}

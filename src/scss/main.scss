@@ -9,6 +9,8 @@
 @use 'components/button';
 @use 'components/slider';
 @use 'components/form';
+@use 'components/motion';
+@use 'components/breadcrumbs';
 
 @use 'blocks/header';
 @use 'blocks/hero';
@@ -20,3 +22,5 @@
 @use 'blocks/stats';
 @use 'blocks/contact';
 @use 'blocks/footer';
+@use 'blocks/page-head';
+@use 'blocks/about-page';

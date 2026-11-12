@@ -47,6 +47,14 @@ body {
     color: $c-white;
   }
 
+  &--center {
+    text-align: center;
+
+    &::after {
+      margin-inline: auto;
+    }
+  }
+
   @include down(md) {
     &::after {
       width: 120px;

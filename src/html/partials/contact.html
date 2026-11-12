@@ -1,0 +1,51 @@
+  <!-- ============================== CONTACT FORM ============================== -->
+  <section class="contact" id="contact" aria-labelledby="contact-title">
+    <div class="container contact__container">
+      <div class="contact__grid">
+        <div class="contact__media" data-reveal="left">
+          <img src="assets/img/photos/project-calzedonia.jpg" width="800" height="450" alt="Вивіска Calzedonia — проєкт improvision" loading="lazy">
+        </div>
+        <div class="contact__body" data-stagger>
+          <h2 class="title" id="contact-title">Обговоримо ваш проєкт?</h2>
+          <p class="contact__text">Залиште заявку — ми зв'яжемося протягом робочого дня, уточнимо задачу та підготуємо орієнтовний розрахунок.</p>
+          <form class="form" action="#" method="post" novalidate data-form>
+            <div class="form__row">
+              <label class="field">
+                <span class="visually-hidden">Ваше ім’я</span>
+                <input class="field__control" type="text" name="name" placeholder="Ваше ім’я" autocomplete="name" required>
+              </label>
+              <label class="field">
+                <span class="visually-hidden">Телефон</span>
+                <input class="field__control" type="tel" name="phone" placeholder="+38 (0__) ___-__-__" autocomplete="tel" inputmode="tel" required data-phone-mask>
+              </label>
+            </div>
+            <label class="field">
+              <span class="visually-hidden">Email</span>
+              <input class="field__control" type="email" name="email" placeholder="Email" autocomplete="email">
+            </label>
+            <label class="field field--select">
+              <span class="visually-hidden">Послуга / тип проєкту</span>
+              <select class="field__control is-placeholder" name="service" data-select>
+                <option value="" selected>Послуга / тип проєкту</option>
+                <option>Вентильовані фасади</option>
+                <option>Вхідні групи</option>
+                <option>Зовнішня реклама</option>
+                <option>Інтерʼєрна реклама та навігація</option>
+                <option>Комерційне будівництво «під&nbsp;ключ»</option>
+                <option>Інше</option>
+              </select>
+            </label>
+            <label class="field">
+              <span class="visually-hidden">Ваше повідомлення</span>
+              <textarea class="field__control" name="message" rows="2" placeholder="Ваше повідомлення"></textarea>
+            </label>
+            <div class="form__footer">
+              <button class="btn btn--primary" type="submit">Надіслати заявку{{icon:arrow}}</button>
+              <p class="form__consent">Натискаючи кнопку, ви погоджуєтесь з обробкою <a href="privacy.html">персональних даних</a></p>
+            </div>
+            <p class="form__status" role="status" aria-live="polite" hidden data-form-status></p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>

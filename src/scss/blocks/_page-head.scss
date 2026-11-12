@@ -1,0 +1,50 @@
+@use '../base/variables' as *;
+
+// Inner page heading: breadcrumbs + H1 + cover image
+.page-head {
+  padding-top: calc(var(--header-h) + 28px);
+
+  &__title {
+    margin-top: 10px;
+    font-size: clamp(2rem, 1.2rem + 3.3vw, 3.75rem);
+    line-height: 1;
+    font-weight: 700;
+    color: $c-text;
+  }
+
+  &__media {
+    margin-top: 30px;
+    aspect-ratio: 1290 / 430;
+    overflow: hidden;
+    background: $c-light;
+
+    // crop as in the mockup (photo 1332×685 inside a 1290×430 frame)
+    img {
+      width: 103.3%;
+      max-width: none;
+      height: auto;
+      margin: -1.24% 0 0 -1.63%;
+    }
+  }
+
+  @include down(md) {
+    padding-top: calc(var(--header-h) + 20px);
+
+    &__title {
+      margin-top: 12px;
+      line-height: 1.08;
+    }
+
+    &__media {
+      margin-top: 24px;
+      aspect-ratio: 16 / 10;
+
+      img {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        object-fit: cover;
+      }
+    }
+  }
+}

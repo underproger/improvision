@@ -20,6 +20,127 @@
     window.addEventListener('scroll', update, { passive: true });
   }
 
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ------------------------------------------------------------------
+   * Reveal on scroll
+   *   [data-reveal]  — single element
+   *   [data-stagger] — every direct child appears in turn
+   * ---------------------------------------------------------------- */
+  const revealGroups = [];
+
+  $$('[data-stagger]').forEach((group) => {
+    const kind = group.dataset.stagger || '';
+    const children = Array.from(group.children).filter((el) => !el.hidden);
+    children.forEach((child, i) => {
+      if (!child.hasAttribute('data-reveal')) child.setAttribute('data-reveal', kind);
+      child.style.setProperty('--i', String(Math.min(i, 8)));
+    });
+    revealGroups.push({ trigger: group, items: children });
+  });
+
+  $$('[data-reveal]').forEach((el) => {
+    if (el.parentElement && el.parentElement.hasAttribute('data-stagger')) return;
+    revealGroups.push({ trigger: el, items: [el] });
+  });
+
+  const showGroup = (g) => g.items.forEach((el) => el.classList.add('is-in'));
+
+  if (!('IntersectionObserver' in window) || reducedMotion) {
+    revealGroups.forEach(showGroup);
+  } else {
+    const byTrigger = new Map(revealGroups.map((g) => [g.trigger, g]));
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          showGroup(byTrigger.get(entry.target));
+          io.unobserve(entry.target);
+        });
+      },
+      { rootMargin: '0px 0px -30px 0px', threshold: 0.05 },
+    );
+    revealGroups.forEach((g) => io.observe(g.trigger));
+  }
+
+  /* ------------------------------------------------------------------
+   * Count-up numbers: <span data-count="480">480</span>
+   * ---------------------------------------------------------------- */
+  const counters = $$('[data-count]');
+  const runCounter = (el) => {
+    const target = parseFloat(el.dataset.count);
+    const duration = 1600;
+    const start = performance.now();
+    const tick = (now) => {
+      const t = Math.min(1, (now - start) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      el.textContent = String(Math.round(target * eased));
+      if (t < 1) requestAnimationFrame(tick);
+    };
+    el.textContent = '0';
+    requestAnimationFrame(tick);
+  };
+
+  if (counters.length && 'IntersectionObserver' in window && !reducedMotion) {
+    const cio = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          runCounter(entry.target);
+          cio.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.6 },
+    );
+    counters.forEach((el) => cio.observe(el));
+  }
+
+  /* ------------------------------------------------------------------
+   * Tabs (company timeline)
+   *   [data-tabs] > [data-tab="id"] buttons + [data-tab-panel="id"] panels
+   * ---------------------------------------------------------------- */
+  $$('[data-tabs]').forEach((root) => {
+    const tabs = $$('[data-tab]', root);
+    const panels = $$('[data-tab-panel]', root);
+
+    const activate = (tab, focus) => {
+      const id = tab.dataset.tab;
+      tabs.forEach((t) => {
+        const on = t === tab;
+        t.classList.toggle('is-active', on);
+        t.setAttribute('aria-selected', String(on));
+        t.tabIndex = on ? 0 : -1;
+      });
+      panels.forEach((p) => {
+        const on = p.dataset.tabPanel === id;
+        if (on && p.hidden) {
+          p.hidden = false;
+          p.classList.remove('is-entering');
+          void p.offsetWidth; // restart animation
+          p.classList.add('is-entering');
+        } else if (!on) {
+          p.hidden = true;
+        }
+      });
+      if (focus) tab.focus();
+    };
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => activate(tab));
+      tab.addEventListener('keydown', (e) => {
+        const enabled = tabs.filter((t) => !t.disabled);
+        const idx = enabled.indexOf(tab);
+        let next = null;
+        if (e.key === 'ArrowRight') next = enabled[(idx + 1) % enabled.length];
+        if (e.key === 'ArrowLeft') next = enabled[(idx - 1 + enabled.length) % enabled.length];
+        if (next) {
+          e.preventDefault();
+          activate(next, true);
+        }
+      });
+    });
+  });
+
   /* ------------------------------------------------------------------
    * Dropdowns (services menu, language switcher)
    * ---------------------------------------------------------------- */

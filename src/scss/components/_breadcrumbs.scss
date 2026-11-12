@@ -1,0 +1,33 @@
+@use '../base/variables' as *;
+
+.breadcrumbs {
+  ol {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  li {
+    font-size: 12px;
+    line-height: 16px;
+    color: $c-muted;
+
+    + li::before {
+      content: '/';
+      margin: 0 15px 0 16px;
+      color: $c-muted;
+    }
+  }
+
+  a {
+    transition: color 0.2s;
+
+    @include hover {
+      color: $c-blue;
+    }
+  }
+
+  [aria-current='page'] {
+    color: $c-blue;
+  }
+}

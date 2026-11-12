@@ -94,6 +94,43 @@
     }
   }
 
+  // About page: 4 numbers in one row, no intro
+  &--band {
+    padding: 34px 0 36px;
+
+    .stats__list {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      column-gap: 30px;
+    }
+
+    .stats__item,
+    .stats__item:nth-child(n + 3) {
+      padding: 42px 30px 45px;
+      border-bottom: 1px solid $c-line;
+    }
+
+    @include down(xl) {
+      .stats__list {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .stats__item:nth-child(-n + 2) {
+        border-bottom: 0;
+      }
+    }
+
+    @include down(md) {
+      .stats__list {
+        column-gap: 20px;
+      }
+
+      .stats__item,
+      .stats__item:nth-child(n + 3) {
+        padding: 20px 0 28px;
+      }
+    }
+  }
+
   @include down(xl) {
     &__grid {
       grid-template-columns: 1fr;
