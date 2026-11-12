@@ -1,0 +1,373 @@
+@use '../base/variables' as *;
+
+// ==========================================================================
+// Contacts page
+// ==========================================================================
+
+.page-intro--contacts {
+  padding-bottom: 69px;
+
+  @include down(md) {
+    padding-bottom: 48px;
+  }
+}
+
+.contact-cards {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 30px;
+  margin-top: 32px;
+
+  @include down(xl) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include down(sm) {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 24px;
+  }
+}
+
+.contact-card {
+  position: relative;
+  min-height: 207px;
+  padding: 53px 21px 24px;
+  border: 1px solid $c-line;
+  transition: border-color 0.2s;
+
+  &__icon {
+    position: absolute;
+    top: 18px;
+    right: 22px;
+  }
+
+  &__title {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 700;
+  }
+
+  &__value {
+    display: block;
+    margin-top: 9px;
+    font-size: 20px;
+    line-height: 24px;
+    font-weight: 500;
+    font-style: normal;
+    word-break: break-word;
+  }
+
+  a.contact-card__value {
+    transition: color 0.2s;
+
+    @include hover {
+      color: $c-blue;
+    }
+  }
+
+  &__note {
+    margin-top: 10px;
+    color: $c-muted;
+  }
+
+  @include hover {
+    border-color: $c-blue;
+  }
+
+  @include down(sm) {
+    min-height: 0;
+  }
+}
+
+// ---- Grey band: visit card + departments + form ----
+.contact-main {
+  padding: 69px 0 80px;
+  background: $c-light;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 630px) minmax(0, 627px);
+    justify-content: space-between;
+    align-items: start;
+    gap: 30px;
+  }
+
+  &__col {
+    display: grid;
+    gap: 30px;
+  }
+
+  @include down(xl) {
+    &__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @include down(md) {
+    padding: var(--section-y) 0;
+  }
+}
+
+.visit-card {
+  padding: 37px 26px 49px 24px;
+  color: $c-white;
+  background: radial-gradient(120% 140% at 30% 0%, #303030 0%, #151515 55%, #0a0a0a 100%);
+
+  &__head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  &__title {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 700;
+  }
+
+  &__badge {
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    height: 27px;
+    margin-top: 4px;
+    padding: 0 15px;
+    background: $c-blue;
+    font-size: 12px;
+    line-height: 1;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+
+  &__text {
+    max-width: 560px;
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 20px;
+    color: $c-muted;
+  }
+
+  &__btn {
+    min-width: 242px;
+    margin-top: 16px;
+  }
+
+  @include down(sm) {
+    padding: 28px 20px 32px;
+
+    &__head {
+      flex-direction: column-reverse;
+      gap: 10px;
+    }
+
+    &__badge {
+      margin-top: 0;
+    }
+  }
+}
+
+.depts {
+  padding: 37px 26px 47px 25px;
+  border: 1px solid $c-line;
+  background: $c-white;
+
+  &__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  &__title {
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 700;
+  }
+
+  &__list {
+    display: grid;
+    gap: 15px;
+    margin-top: 19px;
+  }
+
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 4px 20px;
+
+    dt {
+      color: $c-muted;
+    }
+
+    a {
+      transition: color 0.2s;
+
+      @include hover {
+        color: $c-blue;
+      }
+    }
+  }
+}
+
+.lead-card {
+  padding: 27px 40px 39px;
+  border: 1px solid $c-line;
+  background: $c-white;
+  text-align: center;
+
+  &__title {
+    font-size: clamp(1.5rem, 1.2rem + 0.8vw, 1.875rem);
+    line-height: 1.2;
+    font-weight: 700;
+  }
+
+  &__text {
+    margin-top: 2px;
+  }
+
+  .form {
+    margin-top: 7px;
+    text-align: left;
+  }
+
+  @include down(sm) {
+    padding: 28px 20px 32px;
+  }
+}
+
+// Boxed inputs (contacts form)
+.form--boxed {
+  gap: 15px;
+
+  .form__row {
+    gap: 15px;
+
+    @include down(sm) {
+      gap: 15px;
+    }
+  }
+
+  .field__control {
+    height: 50px;
+    padding: 0 16px;
+    border: 1px solid $c-line;
+    background: $c-white;
+
+    &:focus {
+      border-color: $c-blue;
+    }
+  }
+
+  textarea.field__control {
+    height: 84px;
+    padding-top: 13px;
+  }
+
+  .field--select::after {
+    right: 18px;
+  }
+
+  .form__submit {
+    width: 100%;
+  }
+
+  .form__consent--center {
+    max-width: none;
+    margin-top: -9px;
+    text-align: center;
+  }
+}
+
+// ---- Map ----
+.map {
+  position: relative;
+  height: 476px;
+  overflow: hidden;
+  background: #e8ecef;
+
+  &__frame {
+    position: absolute;
+    inset: 0;
+  }
+
+  &__placeholder,
+  &__iframe {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    object-fit: cover;
+  }
+
+  &__iframe {
+    filter: grayscale(0.35) contrast(0.95);
+  }
+
+  &__card {
+    position: absolute;
+    // anchored to the map pin in the centre of the embed
+    left: calc(50% - 23px);
+    bottom: calc(50% + 40px);
+    z-index: 1;
+    width: 294px;
+    padding: 24px 26px 25px;
+    background: $c-white;
+    box-shadow: 0 10px 30px rgba(5, 35, 66, 0.15);
+    pointer-events: auto;
+  }
+
+  &__name {
+    font-size: 18px;
+    line-height: 24px;
+    font-weight: 700;
+  }
+
+  &__address {
+    margin-top: 6px;
+    line-height: 22px;
+  }
+
+  &__city {
+    margin-top: 4px;
+    font-size: 14px;
+    line-height: 20px;
+    color: $c-muted;
+  }
+
+  &__route {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+    color: $c-blue;
+
+    .icon {
+      transition: transform 0.2s;
+    }
+
+    @include hover {
+      .icon {
+        transform: translate(2px, -2px);
+      }
+    }
+  }
+
+  @include down(md) {
+    height: 420px;
+
+    &__card {
+      left: 20px;
+      right: 20px;
+      bottom: auto;
+      top: 20px;
+      width: auto;
+      transform: none;
+    }
+  }
+}

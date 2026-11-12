@@ -2,6 +2,7 @@
 
 // Generic scroll-snap slider (logic in assets/js/main.js)
 .slider__track {
+  position: relative; // clips absolutely positioned children (e.g. .visually-hidden)
   display: flex;
   overflow-x: auto;
   overscroll-behavior-x: contain;

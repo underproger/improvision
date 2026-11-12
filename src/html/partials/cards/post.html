@@ -1,0 +1,12 @@
+        <article class="post-card" data-category="{{cat}}">
+          <a class="post-card__media" href="{{href}}" tabindex="-1" aria-hidden="true">
+            <img src="assets/img/photos/{{img}}" width="{{w}}" height="{{h}}" alt="" loading="lazy">
+            <span class="post-card__tag">{{catname}}</span>
+          </a>
+          <div class="post-card__body">
+            <time class="post-card__date" datetime="{{datetime}}">{{date}}</time>
+            <h3 class="post-card__title"><a href="{{href}}">{{title}}</a></h3>
+            <p class="post-card__text">{{text}}</p>
+            <a class="btn btn--outline btn--card" href="{{href}}">Читати статтю{{icon:arrow}}<span class="visually-hidden">: {{title}}</span></a>
+          </div>
+        </article>

@@ -94,6 +94,19 @@
     }
   }
 
+  // natural width
+  &--fit {
+    min-width: 0;
+    padding: 0 29px 0 28px;
+  }
+
+  // small outline button in cards
+  &--card {
+    min-width: 0;
+    height: 42px;
+    padding: 0 19px 0 17px;
+  }
+
   &--sm {
     min-width: 0;
     height: 46px;
@@ -102,7 +115,7 @@
   }
 
   @include down(sm) {
-    &:not(.btn--sm) {
+    &:not(.btn--sm):not(.btn--card) {
       width: 100%;
     }
   }

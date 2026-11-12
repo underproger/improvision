@@ -421,6 +421,64 @@
   });
 
   /* ------------------------------------------------------------------
+   * Table of contents: highlight the section in view
+   * ---------------------------------------------------------------- */
+  $$('[data-toc]').forEach((toc) => {
+    const links = $$('a[href^="#"]', toc);
+    const pairs = links
+      .map((a) => [a, document.getElementById(a.getAttribute('href').slice(1))])
+      .filter(([, t]) => t);
+    if (!pairs.length) return;
+    let current = null;
+    const update = () => {
+      // the last heading that has passed the top third of the screen
+      const line = window.innerHeight * 0.35;
+      let active = null;
+      pairs.forEach(([a, t]) => {
+        if (t.getBoundingClientRect().top <= line) active = a;
+      });
+      if (active === current) return;
+      current = active;
+      pairs.forEach(([a]) => {
+        a.classList.toggle('is-active', a === active);
+        if (a === active) a.setAttribute('aria-current', 'true');
+        else a.removeAttribute('aria-current');
+      });
+    };
+    let ticking = false;
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(() => {
+          update();
+          ticking = false;
+        });
+      },
+      { passive: true },
+    );
+    update();
+  });
+
+  /* ------------------------------------------------------------------
+   * Contacts: "Замовити виїзд" preselects the service in the form
+   * ---------------------------------------------------------------- */
+  $$('[data-visit]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const select = $('#lead-form [data-select]');
+      if (!select) return;
+      const option = Array.from(select.options).find((o) => o.text.startsWith('Виїзд'));
+      if (option) {
+        select.value = option.value || option.text;
+        select.dispatchEvent(new Event('change'));
+      }
+      const name = $('#lead-form [name="name"]');
+      if (name) window.setTimeout(() => name.focus({ preventScroll: true }), 500);
+    });
+  });
+
+  /* ------------------------------------------------------------------
    * Phone mask: +38 (0XX) XXX-XX-XX
    * ---------------------------------------------------------------- */
   const PREFIX = '+38 (0';
