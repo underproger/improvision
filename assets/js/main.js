@@ -251,7 +251,10 @@
     // pages = how many "screens" the track holds (works with items of any width)
     const buildDots = () => {
       if (!dotsWrap) return;
-      const count = Math.ceil((track.scrollWidth - 2) / track.clientWidth);
+      // the track can be 0px wide for a moment (DevTools device toggle, hidden parent):
+      // never divide by zero, never create more dots than slides
+      const width = track.clientWidth;
+      const count = width > 0 ? Math.min(items.length, Math.ceil((track.scrollWidth - 2) / width)) : 0;
       if (count === pages && dotsWrap.children.length) return;
       pages = count;
       dotsWrap.innerHTML = '';
@@ -270,6 +273,7 @@
     };
 
     const update = () => {
+      if (track.clientWidth <= 0) return;
       const max = track.scrollWidth - track.clientWidth;
       const ratio = max > 0 ? track.scrollLeft / max : 0;
 
