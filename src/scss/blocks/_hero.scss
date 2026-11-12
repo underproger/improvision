@@ -16,7 +16,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+    object-position: 0% center;
   }
 
   &::before {
@@ -24,7 +24,15 @@
     position: absolute;
     inset: 0;
     z-index: -1;
-    background: rgba(0, 0, 0, 0.3);
+    // darker under the text, the photo stays visible on the right
+    background:
+      linear-gradient(90deg, rgba(4, 16, 32, 0.78) 0%, rgba(4, 16, 32, 0.6) 38%, rgba(4, 16, 32, 0.15) 75%, rgba(4, 16, 32, 0.05) 100%),
+      rgba(0, 0, 0, 0.15);
+
+    @include down(md) {
+      background:
+        linear-gradient(180deg, rgba(4, 16, 32, 0.55) 0%, rgba(4, 16, 32, 0.75) 100%);
+    }
   }
 
   &__title {
