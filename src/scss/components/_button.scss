@@ -1,0 +1,142 @@
+@use '../base/variables' as *;
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-width: 195px;
+  height: 50px;
+  padding: 0 26px;
+  border: 1px solid transparent;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 700;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+
+  .icon {
+    transition: transform 0.2s;
+  }
+
+  @include hover {
+    .icon {
+      transform: translate(2px, -2px);
+    }
+  }
+
+  // Filled blue
+  &--primary {
+    background: $c-blue;
+    border-color: $c-blue;
+    color: $c-white;
+
+    @include hover {
+      background: $c-blue-hover;
+      border-color: $c-blue-hover;
+    }
+  }
+
+  // Blue outline (on white)
+  &--outline {
+    min-width: 197px;
+    height: 52px;
+    border-color: $c-blue;
+    color: $c-blue;
+
+    @include hover {
+      background: $c-blue;
+      color: $c-white;
+    }
+  }
+
+  // White outline (on photo)
+  &--outline-light {
+    min-width: 197px;
+    height: 52px;
+    border-color: $c-white;
+    color: $c-white;
+
+    @include hover {
+      background: $c-white;
+      color: $c-text;
+    }
+  }
+
+  // White filled (header on hero)
+  &--white {
+    background: $c-white;
+    border-color: $c-white;
+    color: $c-text;
+
+    @include hover {
+      background: $c-blue;
+      border-color: $c-blue;
+      color: $c-white;
+    }
+  }
+
+  &--sm {
+    min-width: 0;
+    height: 46px;
+    padding: 0 14px;
+    font-size: 11px;
+  }
+
+  @include down(sm) {
+    &:not(.btn--sm) {
+      width: 100%;
+    }
+  }
+}
+
+// Filter chip
+.chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 122px;
+  height: 42px;
+  padding: 0 20px;
+  border: 1px solid $c-text;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 400;
+  text-transform: uppercase;
+  white-space: nowrap;
+  color: $c-text;
+  transition:
+    background-color 0.2s,
+    border-color 0.2s,
+    color 0.2s;
+
+  &--all {
+    min-width: 81px;
+  }
+
+  &--wide {
+    min-width: 161px;
+  }
+
+  @include hover {
+    border-color: $c-blue;
+    color: $c-blue;
+  }
+
+  &.is-active {
+    background: $c-blue;
+    border-color: $c-blue;
+    color: $c-white;
+  }
+
+  @include down(md) {
+    flex: none;
+    min-width: 0;
+    height: 40px;
+    padding: 0 20px;
+  }
+}

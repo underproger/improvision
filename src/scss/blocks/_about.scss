@@ -1,0 +1,115 @@
+@use '../base/variables' as *;
+
+.about {
+  padding: 98px 0 87px;
+  border-bottom: 1px solid $c-line;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 630px);
+    align-items: start;
+    gap: 48px 60px;
+  }
+
+  &__content {
+    max-width: 580px;
+
+    .title {
+      margin-bottom: 32px;
+    }
+
+    p + p {
+      margin-top: 20px;
+    }
+
+    .btn {
+      margin-top: 27px;
+    }
+  }
+
+  &__lead {
+    font-weight: 600;
+  }
+
+  &__cards {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px 30px;
+    padding-top: 4px;
+  }
+
+  @include down(xl) {
+    &__grid {
+      grid-template-columns: 1fr;
+    }
+
+    &__content {
+      max-width: 720px;
+    }
+
+    &__cards {
+      padding-top: 0;
+    }
+  }
+
+  @include down(md) {
+    padding: var(--section-y) 0;
+
+    &__cards {
+      gap: 16px;
+    }
+  }
+
+  @include down(sm) {
+    &__cards {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+// Step card (Проєктування / Виробництво / ...)
+.step-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 168px;
+  padding: 24px 24px 22px;
+  border: 1px solid $c-line;
+  background: $c-white;
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s;
+
+  &__icon {
+    position: absolute;
+    top: 16px;
+    right: 15px;
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+  }
+
+  &__title {
+    margin-bottom: 11px;
+    padding-right: 56px;
+    font-size: 20px;
+    line-height: 27px;
+    font-weight: 700;
+  }
+
+  &__text {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  @include hover {
+    border-color: $c-blue;
+    box-shadow: 0 12px 32px rgba(5, 35, 66, 0.08);
+  }
+
+  @include down(md) {
+    min-height: 0;
+    padding-top: 80px;
+  }
+}

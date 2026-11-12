@@ -1,0 +1,172 @@
+@use '../base/variables' as *;
+
+.footer {
+  padding: 74px 0 78px;
+  color: $c-white;
+  background:
+    radial-gradient(70% 140% at 12% 0%, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0) 70%),
+    $c-dark;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 441px 429px 200px minmax(0, 1fr);
+  }
+
+  &__label {
+    display: block;
+    margin-bottom: 4px;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: $c-muted;
+  }
+
+  // Column 1
+  &__brand {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  &__logo {
+    width: 325px;
+    max-width: 100%;
+    margin-top: 45px;
+
+    svg {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &__copy {
+    margin-top: 45px;
+    font-size: 12px;
+    line-height: 16px;
+    color: $c-muted;
+  }
+
+  &__legal {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 30px;
+    margin-top: 13px;
+    line-height: 16px;
+
+    a {
+      font-size: 12px;
+      line-height: 16px;
+      color: $c-muted;
+      transition: color 0.2s;
+
+      @include hover {
+        color: $c-white;
+      }
+    }
+  }
+
+  // Column 2
+  &__contacts {
+    display: grid;
+    align-content: start;
+    gap: 35px;
+  }
+
+  &__contact {
+    min-height: 44px;
+    font-size: 14px;
+    line-height: 18px;
+
+    a {
+      transition: color 0.2s;
+
+      @include hover {
+        color: $c-blue;
+      }
+    }
+
+    address {
+      max-width: 180px;
+      font-style: normal;
+    }
+  }
+
+  &__phone {
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  // Columns 3–4
+  &__menu {
+    display: grid;
+    gap: 18px;
+    margin-top: 7px;
+    font-size: 14px;
+    line-height: 20px;
+
+    a {
+      font-size: 14px;
+      line-height: 20px;
+      font-weight: 500;
+      transition: color 0.2s;
+
+      @include hover {
+        color: $c-blue;
+      }
+    }
+  }
+
+  @include down(xl) {
+    &__grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 56px 40px;
+    }
+  }
+
+  @include down(md) {
+    padding: 56px 0;
+
+    &__grid {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    &__brand {
+      order: 4;
+    }
+
+    &__logo {
+      width: 220px;
+    }
+
+    &__copy {
+      margin-top: 32px;
+    }
+  }
+}
+
+.socials {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 35px;
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid currentColor;
+    margin-top: -2px;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: $c-muted;
+    transition: color 0.2s;
+
+    @include hover {
+      color: $c-white;
+    }
+  }
+}

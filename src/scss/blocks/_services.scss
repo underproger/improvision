@@ -1,0 +1,148 @@
+@use '../base/variables' as *;
+
+.services {
+  // distance from the container content edge to the viewport edge
+  --bleed: calc(var(--gutter) + max(0px, (100vw - #{$container} - var(--gutter) * 2) / 2));
+
+  padding: 98px 0 100px;
+
+  &__track {
+    gap: 30px;
+    margin-top: 35px;
+    margin-right: calc(var(--bleed) * -1);
+    cursor: grab;
+
+    // end spacer so the last card stops at the container edge
+    &::after {
+      content: '';
+      flex: 0 0 max(1px, calc(var(--bleed) - 30px));
+    }
+  }
+
+  .slider__progress {
+    margin-top: 31px;
+  }
+
+  @include down(md) {
+    padding: var(--section-y) 0;
+
+    &__track {
+      gap: 16px;
+      margin-top: 28px;
+
+      &::after {
+        flex-basis: max(1px, calc(var(--bleed) - 16px));
+      }
+    }
+
+    .slider__progress {
+      margin-top: 24px;
+    }
+  }
+}
+
+.service-card {
+  position: relative;
+  width: 425px;
+  height: 280px;
+  overflow: hidden;
+  color: $c-white;
+  background: $c-navy;
+
+  &__link {
+    display: block;
+    height: 100%;
+  }
+
+  &__img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 38%, rgba(0, 0, 0, 0.78) 100%);
+    pointer-events: none;
+  }
+
+  &__num {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 29px;
+    height: 60px;
+    background: $c-blue;
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 500;
+  }
+
+  &__body {
+    position: absolute;
+    left: 16px;
+    right: 78px;
+    bottom: 16px;
+    z-index: 1;
+  }
+
+  &__title {
+    max-width: 270px;
+    font-size: 20px;
+    line-height: 22px;
+    font-weight: 600;
+  }
+
+  &__text {
+    max-width: 270px;
+    margin-top: 6px;
+    font-size: 14px;
+    line-height: 18px;
+  }
+
+  &__arrow {
+    position: absolute;
+    right: 18px;
+    bottom: 17px;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 42px;
+    height: 42px;
+    border: 1px solid $c-white;
+    transition:
+      background-color 0.2s,
+      color 0.2s;
+
+    .icon {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  @include hover {
+    .service-card__img {
+      transform: scale(1.05);
+    }
+
+    .service-card__arrow {
+      background: $c-white;
+      color: $c-blue;
+    }
+  }
+
+  @include down(md) {
+    width: min(82vw, 360px);
+    height: 260px;
+  }
+}

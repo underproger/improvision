@@ -1,0 +1,440 @@
+@use '../base/variables' as *;
+
+.header {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 100;
+  height: var(--header-h);
+  color: $c-white;
+  transition:
+    background-color 0.25s,
+    color 0.25s,
+    box-shadow 0.25s;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    height: 100%;
+  }
+
+  &__logo {
+    flex: none;
+    width: 110px;
+    color: currentColor;
+
+    svg {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+  }
+
+  &__phone {
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 500;
+    white-space: nowrap;
+    transition: color 0.2s;
+
+    @include hover {
+      color: $c-blue;
+    }
+  }
+
+  &__cta {
+    margin-left: 20px;
+  }
+
+  // White state: after scroll / inner pages / open menu
+  &.is-solid,
+  &.is-menu-open {
+    background: $c-white;
+    color: $c-text;
+    box-shadow: 0 1px 0 $c-line;
+
+    .header__cta {
+      background: $c-blue;
+      border-color: $c-blue;
+      color: $c-white;
+
+      @include hover {
+        background: $c-blue-hover;
+        border-color: $c-blue-hover;
+      }
+    }
+  }
+
+  @include down(md) {
+    &__phone,
+    &__cta {
+      display: none;
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+// Main navigation
+// --------------------------------------------------------------------------
+.nav {
+  margin-left: 60px;
+
+  &__list {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+  }
+
+  &__item {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  @include up(xl) {
+    // as in the mockup: slightly wider gap before "Послуги"
+    &__item--dropdown {
+      margin-left: 8px;
+    }
+  }
+
+  &__link {
+    display: inline-flex;
+    align-items: center;
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 600;
+    white-space: nowrap;
+    transition: color 0.2s;
+
+    @include hover {
+      color: $c-blue;
+    }
+
+    &.is-current {
+      color: $c-blue;
+    }
+  }
+
+  &__arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 17px;
+    height: 20px;
+    padding-left: 7px;
+    color: inherit;
+
+    svg {
+      width: 10px;
+      height: 5px;
+      transition: transform 0.2s;
+    }
+  }
+
+  &__sub {
+    position: absolute;
+    top: 100%;
+    left: -24px;
+    min-width: 330px;
+    padding: 14px 0;
+    margin-top: 20px;
+    background: $c-white;
+    color: $c-text;
+    box-shadow: 0 16px 40px rgba(5, 35, 66, 0.12);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+    transition:
+      opacity 0.2s,
+      transform 0.2s,
+      visibility 0.2s;
+
+    // hover bridge
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -22px 0 100%;
+    }
+
+    a {
+      display: block;
+      padding: 9px 24px;
+      font-size: 15px;
+      line-height: 20px;
+      font-weight: 500;
+      transition:
+        color 0.2s,
+        background-color 0.2s;
+
+      @include hover {
+        color: $c-blue;
+        background: $c-light;
+      }
+    }
+  }
+
+  &__item--dropdown.is-open,
+  &__item--dropdown:focus-within {
+    .nav__sub {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+    }
+
+    .nav__arrow svg {
+      transform: rotate(180deg);
+    }
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &__item--dropdown:hover {
+      .nav__sub {
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+      }
+
+      .nav__arrow svg {
+        transform: rotate(180deg);
+      }
+    }
+  }
+
+  &__extra {
+    display: none;
+  }
+
+  // ---- Mobile off-canvas ----
+  @include down(xl) {
+    position: fixed;
+    inset: var(--header-h) 0 0;
+    z-index: -1;
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 24px var(--gutter) 40px;
+    background: $c-white;
+    color: $c-text;
+    overflow-y: auto;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-12px);
+    transition:
+      opacity 0.25s,
+      transform 0.25s,
+      visibility 0.25s;
+
+    &.is-open {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+    }
+
+    &__list {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 0;
+    }
+
+    &__item {
+      flex-wrap: wrap;
+      border-bottom: 1px solid $c-line;
+    }
+
+    &__link {
+      flex: 1;
+      padding: 16px 0;
+      font-size: 20px;
+      line-height: 26px;
+    }
+
+    &__arrow {
+      width: 44px;
+      height: 44px;
+      padding: 0;
+
+      svg {
+        width: 14px;
+        height: 7px;
+      }
+    }
+
+    &__sub {
+      position: static;
+      flex-basis: 100%;
+      min-width: 0;
+      margin: 0;
+      padding: 0 0 12px;
+      box-shadow: none;
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+      display: none;
+
+      &::before {
+        display: none;
+      }
+
+      a {
+        padding: 8px 0 8px 16px;
+        font-size: 16px;
+        color: $c-muted;
+      }
+    }
+
+    &__item--dropdown.is-open .nav__sub {
+      display: block;
+    }
+
+    &__extra {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+      margin-top: 32px;
+    }
+
+    &__phone {
+      font-size: 20px;
+      font-weight: 600;
+    }
+  }
+}
+
+// --------------------------------------------------------------------------
+// Language switcher
+// --------------------------------------------------------------------------
+.lang {
+  position: relative;
+  margin-left: 39px;
+
+  &__current {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    height: 46px;
+    font-size: 15px;
+    line-height: 20px;
+    font-weight: 600;
+
+    svg {
+      width: 10px;
+      height: 5px;
+      transition: transform 0.2s;
+    }
+  }
+
+  &__list {
+    position: absolute;
+    top: 100%;
+    left: -14px;
+    min-width: 72px;
+    padding: 8px 0;
+    background: $c-white;
+    color: $c-text;
+    box-shadow: 0 16px 40px rgba(5, 35, 66, 0.12);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+    transition:
+      opacity 0.2s,
+      transform 0.2s,
+      visibility 0.2s;
+
+    a {
+      display: block;
+      padding: 6px 14px;
+      font-size: 15px;
+      font-weight: 500;
+
+      @include hover {
+        color: $c-blue;
+      }
+
+      &[aria-current='true'] {
+        color: $c-blue;
+      }
+    }
+  }
+
+  &.is-open {
+    .lang__list {
+      opacity: 1;
+      visibility: visible;
+      transform: none;
+    }
+
+    .lang__current svg {
+      transform: rotate(180deg);
+    }
+  }
+
+  @include down(xl) {
+    margin-left: 28px;
+  }
+
+  @include down(md) {
+    margin-left: auto;
+  }
+}
+
+// --------------------------------------------------------------------------
+// Burger
+// --------------------------------------------------------------------------
+.burger {
+  display: none;
+  position: relative;
+  width: 44px;
+  height: 44px;
+  margin-left: 16px;
+  margin-right: -10px;
+
+  span,
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    left: 11px;
+    right: 11px;
+    height: 2px;
+    background: currentColor;
+    transition:
+      transform 0.25s,
+      opacity 0.25s;
+  }
+
+  span {
+    top: 21px;
+  }
+
+  &::before {
+    top: 14px;
+  }
+
+  &::after {
+    top: 28px;
+  }
+
+  &[aria-expanded='true'] {
+    span {
+      opacity: 0;
+    }
+
+    &::before {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    &::after {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+  }
+
+  @include down(xl) {
+    display: block;
+  }
+}

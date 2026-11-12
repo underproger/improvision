@@ -1,0 +1,74 @@
+@use "sass:map";
+
+// ==========================================================================
+// Design tokens (from Figma mockup, 1440 desktop)
+// ==========================================================================
+
+// Colors
+$c-blue: #187ce1;
+$c-blue-hover: #0f68c2;
+$c-navy: #052342;
+$c-text: #282828;
+$c-muted: #8a919c;
+$c-line: #dbe5ef;
+$c-light: #f4f6f9;
+$c-dark: #090909;
+$c-white: #fff;
+
+// Typography
+$font: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+
+// Layout
+$container: 1290px;
+
+// Breakpoints (max-width, desktop-first)
+$bp: (
+  xl: 1199.98px,
+  lg: 991.98px,
+  md: 767.98px,
+  sm: 575.98px,
+);
+
+@mixin down($key) {
+  @media (max-width: map.get($bp, $key)) {
+    @content;
+  }
+}
+
+@mixin up($key) {
+  @media (min-width: calc(#{map.get($bp, $key)} + 0.02px)) {
+    @content;
+  }
+}
+
+@mixin hover {
+  @media (hover: hover) and (pointer: fine) {
+    &:hover {
+      @content;
+    }
+  }
+}
+
+:root {
+  --c-blue: #{$c-blue};
+  --c-navy: #{$c-navy};
+  --c-text: #{$c-text};
+  --c-muted: #{$c-muted};
+  --c-line: #{$c-line};
+  --c-light: #{$c-light};
+  --gutter: 75px;
+  --section-y: 100px;
+  --header-h: 81px;
+
+  @include down(xl) {
+    --gutter: 40px;
+    --section-y: 88px;
+    --header-h: 72px;
+  }
+
+  @include down(md) {
+    --gutter: 20px;
+    --section-y: 64px;
+    --header-h: 64px;
+  }
+}

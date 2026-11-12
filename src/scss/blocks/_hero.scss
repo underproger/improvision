@@ -1,0 +1,98 @@
+@use '../base/variables' as *;
+
+.hero {
+  position: relative;
+  isolation: isolate;
+  min-height: 777px;
+  padding: 188px 0 138px;
+  color: $c-white;
+  background: $c-navy;
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  &__title {
+    max-width: 12em;
+    font-size: clamp(2.125rem, 1.2rem + 3.3vw, 3.75rem);
+    line-height: 1;
+    font-weight: 700;
+  }
+
+  &__text {
+    max-width: 620px;
+    margin-top: 39px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 20px;
+    margin-top: 28px;
+  }
+
+  &__features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px 30px;
+    margin-top: 60px;
+  }
+
+  &__feature {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    line-height: 20px;
+
+    img {
+      flex: none;
+      width: 36px;
+      height: 36px;
+    }
+  }
+
+  @include down(xl) {
+    min-height: 0;
+    padding: calc(var(--header-h) + 100px) 0 100px;
+  }
+
+  @include down(md) {
+    padding: calc(var(--header-h) + 56px) 0 56px;
+
+    &__title {
+      line-height: 1.08;
+    }
+
+    &__text {
+      margin-top: 24px;
+    }
+
+    &__features {
+      margin-top: 40px;
+      gap: 16px 24px;
+    }
+  }
+
+  @include down(sm) {
+    &__features {
+      flex-direction: column;
+    }
+  }
+}
