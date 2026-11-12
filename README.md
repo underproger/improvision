@@ -15,8 +15,8 @@
 
 Языки: украинский — в корне, английский — `/en/`, русский — `/ru/` (те же имена файлов).
 
-**Версия на MODX 3** — в папке [`modx/`](modx/README.md): готовый сайт, дамп БД и инструкция по установке.
-После правок SCSS/JS: `npm run modx:assets` — копирует сборку в `modx/site/assets/`.
+**Версия на MODX 3** — отдельный репозиторий [underproger/improvision-modx](https://github.com/underproger/improvision-modx).
+После правок SCSS/JS: `npm run modx:assets` — копирует сборку в `../improvision-modx/assets/` (репозитории лежат рядом).
 
 ## Структура
 
@@ -49,7 +49,7 @@ npm run html         # только src/html → *.html
 npm run watch        # пересборка CSS при изменениях
 npm run watch:html   # пересборка HTML при изменениях
 npm run i18n:check   # проверить, что всё переведено
-npm run modx:assets  # CSS + копия assets в MODX-версию (modx/site/assets)
+npm run modx:assets  # CSS + копия assets в MODX-версию (../improvision-modx/assets)
 ```
 
 В исходниках страниц:

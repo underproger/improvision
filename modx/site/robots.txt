@@ -1,6 +1,0 @@
-User-agent: *
-Disallow: /manager/
-Disallow: /connectors/
-Disallow: /lead.json
-
-Sitemap: https://improvision.com.ua/sitemap.xml

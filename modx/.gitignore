@@ -1,7 +1,0 @@
-site/core/cache/*
-!site/core/cache/.keep
-site/core/export/*
-!site/core/export/.keep
-_dev/data.json
-_dev/ids.json
-_dev/rid.json
