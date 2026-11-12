@@ -260,6 +260,7 @@
 
     track.addEventListener('pointerdown', (e) => {
       if (e.pointerType !== 'mouse' || e.button !== 0) return;
+      e.preventDefault(); // no text selection while dragging
       startX = e.clientX;
       startScroll = track.scrollLeft;
       dragging = true;
@@ -306,11 +307,24 @@
       true,
     );
 
+    // no native drag of images / links
+    track.addEventListener('dragstart', (e) => e.preventDefault());
+
     track.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', () => {
+
+    // recalc when the track or its items change size (logos load, rotate, resize)
+    const refresh = () => {
       if (type === 'dots') buildDots();
       update();
-    });
+    };
+    if ('ResizeObserver' in window) {
+      const ro = new ResizeObserver(refresh);
+      ro.observe(track);
+      items.forEach((item) => ro.observe(item));
+    } else {
+      window.addEventListener('resize', refresh);
+      window.addEventListener('load', refresh);
+    }
 
     if (type === 'dots') buildDots();
     update();

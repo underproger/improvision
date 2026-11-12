@@ -67,6 +67,20 @@
     }
   }
 
+  // Dark outline (on light backgrounds)
+  &--outline-dark {
+    min-width: 0;
+    height: 52px;
+    padding: 0 29px;
+    border-color: $c-text;
+    color: $c-text;
+
+    @include hover {
+      background: $c-text;
+      color: $c-white;
+    }
+  }
+
   // White filled (header on hero)
   &--white {
     background: $c-white;

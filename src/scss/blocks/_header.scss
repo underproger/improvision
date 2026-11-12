@@ -32,6 +32,7 @@
     display: flex;
     align-items: center;
     margin-left: auto;
+    padding-left: 24px;
   }
 
   &__phone {
@@ -99,6 +100,19 @@
     // as in the mockup: slightly wider gap before "Послуги"
     &__item--dropdown {
       margin-left: 8px;
+    }
+  }
+
+  // 1200–1365: tighter menu so it does not run into the phone
+  @media (min-width: 1200px) and (max-width: 1365.98px) {
+    margin-left: 40px;
+
+    &__list {
+      gap: 20px;
+    }
+
+    &__item--dropdown {
+      margin-left: 0;
     }
   }
 
@@ -372,6 +386,10 @@
     .lang__current svg {
       transform: rotate(180deg);
     }
+  }
+
+  @media (min-width: 1200px) and (max-width: 1365.98px) {
+    margin-left: 24px;
   }
 
   @include down(xl) {

@@ -1,0 +1,203 @@
+@use '../base/variables' as *;
+
+// ==========================================================================
+// Service page
+// ==========================================================================
+
+// breadcrumbs strip above a coloured hero
+.page-crumbs {
+  padding: calc(var(--header-h) + 28px) 0 28px;
+
+  @include down(md) {
+    padding: calc(var(--header-h) + 20px) 0 20px;
+  }
+}
+
+.service-hero {
+  padding: 64px 0 59px;
+  background: $c-light;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: minmax(380px, 1fr) minmax(0, 770px);
+    align-items: start;
+    gap: 40px 75px;
+
+    @include down(xl) {
+      column-gap: 40px;
+    }
+  }
+
+  &__content {
+    margin-top: -7px;
+  }
+
+  &__title {
+    font-size: clamp(2.25rem, 1.2rem + 3.3vw, 3.75rem);
+    line-height: 1;
+    font-weight: 700;
+  }
+
+  &__text {
+    max-width: 445px;
+    margin-top: 24px;
+    font-weight: 600;
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px 19px;
+    margin-top: 28px;
+  }
+
+  &__media {
+    aspect-ratio: 770 / 433;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  @include down(lg) {
+    &__grid {
+      grid-template-columns: 1fr;
+    }
+
+    &__content {
+      margin-top: 0;
+    }
+
+    &__text {
+      max-width: 620px;
+    }
+  }
+
+  @include down(md) {
+    padding: 40px 0;
+  }
+}
+
+// sidebar + article
+.service-layout {
+  padding: 75px 0 100px;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 300px minmax(0, 1fr);
+    align-items: start;
+    gap: 48px 70px;
+  }
+
+  .service-article {
+    margin-top: -2px;
+  }
+
+  @include down(xl) {
+    &__grid {
+      grid-template-columns: 1fr;
+    }
+
+    .service-aside {
+      order: 2;
+    }
+  }
+
+  @include down(md) {
+    padding: 48px 0 var(--section-y);
+  }
+}
+
+.service-aside {
+  position: sticky;
+  top: calc(var(--header-h) + 24px);
+  display: grid;
+  gap: 40px;
+
+  @include down(xl) {
+    position: static;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 30px;
+  }
+
+  @include down(md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.service-menu {
+  border: 1px solid $c-line;
+
+  li + li {
+    border-top: 1px solid $c-line;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    min-height: 64px;
+    padding: 12px 20px;
+    font-size: 16px;
+    line-height: 18px;
+    font-weight: 500;
+    transition:
+      background-color 0.2s,
+      color 0.2s;
+
+    @include hover {
+      color: $c-blue;
+    }
+
+    &[aria-current='page'] {
+      background: $c-blue;
+      color: $c-white;
+    }
+  }
+}
+
+.consult-card {
+  padding: 22px 24px 34px;
+  text-align: center;
+  color: $c-white;
+  background:
+    radial-gradient(120% 95% at 50% 0%, #303030 0%, #141414 55%, #0a0a0a 100%);
+
+  &__title {
+    font-size: 20px;
+    line-height: 27px;
+    font-weight: 700;
+  }
+
+  &__text {
+    max-width: 240px;
+    margin: 5px auto 0;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  &__btn {
+    width: 100%;
+    min-width: 0;
+    margin-top: 10px;
+  }
+}
+
+// related projects on a grey background
+.projects--related {
+  padding: 68px 0 77px;
+  background: $c-light;
+
+  .projects__grid {
+    margin-top: 30px;
+  }
+
+  @include down(md) {
+    padding: var(--section-y) 0;
+  }
+}

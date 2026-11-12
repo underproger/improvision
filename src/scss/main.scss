@@ -11,6 +11,7 @@
 @use 'components/form';
 @use 'components/motion';
 @use 'components/breadcrumbs';
+@use 'components/prose';
 
 @use 'blocks/header';
 @use 'blocks/hero';
@@ -24,3 +25,4 @@
 @use 'blocks/footer';
 @use 'blocks/page-head';
 @use 'blocks/about-page';
+@use 'blocks/service-page';

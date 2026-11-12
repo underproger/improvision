@@ -18,7 +18,7 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SRC = join(ROOT, 'src', 'html');
 const read = (file) => readFileSync(file, 'utf8');
 
-const INCLUDE_RE = /[ \t]*<!--\s*@include\s+([\w-]+)(\s+\{[\s\S]*?\})?\s*-->/g;
+const INCLUDE_RE = /[ \t]*<!--\s*@include\s+([\w/-]+)(\s+\{[\s\S]*?\})?\s*-->/g;
 
 function applyHeader(html, params) {
   let out = html;
@@ -28,6 +28,13 @@ function applyHeader(html, params) {
       `class="nav__link" href="${params.current}"`,
       `class="nav__link is-current" href="${params.current}" aria-current="page"`,
     );
+    // a page from the "Послуги" dropdown: highlight the dropdown toggle too
+    const subLink = `<li><a href="${params.current}">`;
+    if (out.includes(subLink)) {
+      out = out
+        .replace(subLink, `<li><a href="${params.current}" aria-current="page">`)
+        .replace('class="nav__link nav__toggle"', 'class="nav__link nav__toggle is-current"');
+    }
   }
   return out;
 }
