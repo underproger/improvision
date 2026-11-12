@@ -83,18 +83,27 @@
   if (!('IntersectionObserver' in window) || reducedMotion) {
     revealGroups.forEach(showGroup);
   } else {
-    const byTrigger = new Map(revealGroups.map((g) => [g.trigger, g]));
+    // element → group it reveals
+    const targets = new Map();
+    revealGroups.forEach((g) => {
+      targets.set(g.trigger, g);
+      // A stagger wrapper can be `display: contents` on mobile (hero, .section-head):
+      // it has no box and never intersects, so each child is watched as well.
+      g.items.forEach((el) => {
+        if (el !== g.trigger && !targets.has(el)) targets.set(el, { trigger: el, items: [el] });
+      });
+    });
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
-          showGroup(byTrigger.get(entry.target));
+          showGroup(targets.get(entry.target));
           io.unobserve(entry.target);
         });
       },
       { rootMargin: '0px 0px -30px 0px', threshold: 0.05 },
     );
-    revealGroups.forEach((g) => io.observe(g.trigger));
+    targets.forEach((g, el) => io.observe(el));
   }
 
   /* ------------------------------------------------------------------
