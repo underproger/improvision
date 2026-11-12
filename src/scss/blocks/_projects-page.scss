@@ -1,0 +1,424 @@
+@use '../base/variables' as *;
+
+// ==========================================================================
+// Projects list + single project
+// ==========================================================================
+
+// ---- Simple page intro: breadcrumbs + H1 + text ----
+.page-intro {
+  padding: calc(var(--header-h) + 28px) 0 32px;
+
+  &__title {
+    margin-top: 29px;
+    font-size: clamp(2.25rem, 1.2rem + 3.3vw, 3.75rem);
+    line-height: 1;
+    font-weight: 700;
+  }
+
+  &__text {
+    max-width: 1260px;
+    margin-top: 24px;
+    font-weight: 600;
+  }
+
+  @include down(md) {
+    padding: calc(var(--header-h) + 20px) 0 28px;
+
+    &__title {
+      margin-top: 16px;
+    }
+
+    &__text {
+      margin-top: 16px;
+    }
+  }
+}
+
+// ---- Catalog (grey background) ----
+.projects--catalog {
+  padding: 45px 0 67px;
+  background: $c-light;
+
+  .projects__filters {
+    margin-top: 0;
+  }
+
+  .projects__grid {
+    row-gap: 38px;
+    margin-top: 23px;
+  }
+
+  @include down(md) {
+    padding: 32px 0 var(--section-y);
+  }
+}
+
+.projects__bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 30px;
+
+  @include down(lg) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.projects__count {
+  flex: none;
+  font-size: 12px;
+  line-height: 16px;
+  color: $c-muted;
+
+  b {
+    font-weight: 400;
+    color: $c-text;
+  }
+}
+
+// ---- Pagination ----
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 39px;
+
+  &__item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border: 1px solid $c-text;
+    font-size: 16px;
+    line-height: 1;
+    color: $c-text;
+    transition:
+      background-color 0.2s,
+      border-color 0.2s,
+      color 0.2s;
+
+    .icon--long {
+      width: 17px;
+      height: 10px;
+    }
+
+    @include hover {
+      border-color: $c-blue;
+      color: $c-blue;
+    }
+
+    &.is-active {
+      background: $c-blue;
+      border-color: $c-blue;
+      color: $c-white;
+    }
+
+    &.is-disabled {
+      opacity: 0.4;
+      pointer-events: none;
+    }
+  }
+
+  @include down(sm) {
+    gap: 8px;
+
+    &__item {
+      width: 44px;
+      height: 44px;
+    }
+  }
+}
+
+// ---- Single project: hero with gallery ----
+.project-hero {
+  padding: 40px 0 70px;
+  background: $c-light;
+
+  &__title {
+    font-size: clamp(2.25rem, 1.2rem + 3.3vw, 3.75rem);
+    line-height: 1;
+    font-weight: 700;
+  }
+
+  &__text {
+    max-width: 1220px;
+    margin-top: 24px;
+    font-weight: 600;
+  }
+
+  @include down(md) {
+    padding: 32px 0 48px;
+
+    &__title {
+      line-height: 1.08;
+    }
+
+    &__text {
+      margin-top: 16px;
+    }
+  }
+}
+
+.gallery {
+  margin-top: 23px;
+
+  &__main {
+    position: relative;
+    aspect-ratio: 1290 / 726;
+    overflow: hidden;
+    background: $c-navy;
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: opacity 0.3s;
+
+    &.is-loading {
+      opacity: 0.35;
+    }
+  }
+
+  &__nav {
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    margin-top: -15px;
+    border: 1px solid $c-white;
+    background: rgba(0, 0, 0, 0.18); // keeps the arrow readable on light photos
+    color: $c-white;
+    transition:
+      background-color 0.2s,
+      color 0.2s;
+
+    .icon--long {
+      width: 17px;
+      height: 10px;
+    }
+
+    @include hover {
+      background: $c-white;
+      color: $c-text;
+    }
+
+    &--prev {
+      left: 21px;
+    }
+
+    &--next {
+      right: 22px;
+    }
+  }
+
+  &__thumbs {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 16px;
+    margin-top: 15px;
+  }
+
+  &__thumb {
+    position: relative;
+    aspect-ratio: 245 / 167;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 2px solid transparent;
+      transition: border-color 0.2s;
+    }
+
+    @include hover {
+      img {
+        transform: scale(1.05);
+      }
+    }
+
+    &.is-active {
+      box-shadow: 0 0 14px rgba(24, 124, 225, 0.35);
+
+      &::after {
+        border-color: $c-blue;
+      }
+    }
+  }
+
+  @include down(md) {
+    &__nav {
+      width: 40px;
+      height: 40px;
+      margin-top: -20px;
+
+      &--prev {
+        left: 10px;
+      }
+
+      &--next {
+        right: 10px;
+      }
+    }
+
+    &__thumbs {
+      gap: 6px;
+      margin-top: 6px;
+    }
+  }
+}
+
+// ---- Single project: description + specs ----
+.project-body {
+  padding: 67px 0 100px;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: minmax(0, 740px) minmax(0, 480px);
+    justify-content: space-between;
+    align-items: start;
+    gap: 48px 60px;
+  }
+
+  &__content {
+    > .checklist-box {
+      margin-top: 28px;
+    }
+
+    > .checklist-box + * {
+      margin-top: 29px;
+    }
+  }
+
+  &__subtitle,
+  .prose &__subtitle {
+    font-size: 20px;
+    line-height: 27px;
+    font-weight: 600;
+  }
+
+  .tags {
+    margin-top: 11px;
+  }
+
+  @include down(xl) {
+    &__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  @include down(md) {
+    padding: 48px 0 var(--section-y);
+  }
+}
+
+.project-aside {
+  position: sticky;
+  top: calc(var(--header-h) + 24px);
+  display: grid;
+  gap: 39px;
+  padding-top: 20px;
+
+  @include down(xl) {
+    position: static;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: start;
+    gap: 30px;
+    padding-top: 0;
+  }
+
+  @include down(md) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.specs {
+  &__title {
+    margin-bottom: 14px;
+    font-size: 20px;
+    line-height: 27px;
+    font-weight: 600;
+  }
+
+  &__list {
+    border-top: 2px solid #e0eaec;
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: 251px minmax(0, 1fr);
+    align-items: center;
+    min-height: 49px;
+    border-bottom: 1px solid $c-line;
+
+    &:nth-child(odd) {
+      background: $c-light;
+    }
+
+    dt,
+    dd {
+      padding: 12px 20px;
+      line-height: 22px;
+    }
+
+    dt {
+      color: $c-muted;
+    }
+
+    dd {
+      font-weight: 500;
+    }
+  }
+
+  @include down(sm) {
+    &__row {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+}
+
+// ---- Tags ----
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 15px;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding: 0 19px;
+  border: 1px solid $c-text;
+  font-size: 12px;
+  line-height: 1;
+  font-weight: 500;
+  text-transform: uppercase;
+  color: $c-text;
+  transition:
+    border-color 0.2s,
+    color 0.2s;
+
+  @at-root a#{&} {
+    @include hover {
+      border-color: $c-blue;
+      color: $c-blue;
+    }
+  }
+}

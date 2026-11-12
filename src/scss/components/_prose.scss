@@ -36,7 +36,8 @@
     font-weight: 600;
   }
 
-  a:not(.btn) {
+  // plain links in text only (components inside .prose keep their own styles)
+  a:not([class]) {
     color: $c-blue;
     text-decoration: underline;
     text-underline-offset: 2px;
@@ -168,6 +169,36 @@
       &::before {
         left: 0;
       }
+    }
+  }
+}
+
+// one column, smaller paddings (project page)
+.checklist-box--compact {
+  padding: 42px 36px 41px;
+
+  @include down(md) {
+    padding: 28px 20px;
+  }
+}
+
+.checklist--single {
+  grid-template-columns: 1fr;
+  gap: 32px;
+
+  li {
+    padding-left: 46px;
+
+    &::before {
+      left: 0;
+    }
+  }
+
+  @include down(md) {
+    gap: 16px;
+
+    li {
+      padding-left: 40px;
     }
   }
 }

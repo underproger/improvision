@@ -340,6 +340,8 @@
   if (filters && grid) {
     const cards = $$('[data-category]', grid);
     const empty = $('[data-filter-empty]', grid);
+    const counter = $('[data-filter-count]');
+    const counterInitial = counter ? counter.innerHTML : '';
 
     filters.addEventListener('click', (e) => {
       const btn = e.target.closest('[data-filter]');
@@ -359,8 +361,64 @@
         if (show) visible += 1;
       });
       if (empty) empty.hidden = visible > 0;
+      if (counter) {
+        counter.innerHTML = value === 'all' ? counterInitial : `Показано: <b>${visible}</b>`;
+      }
     });
   }
+
+  /* ------------------------------------------------------------------
+   * Gallery (project page): main photo + thumbnails + arrows + swipe
+   * ---------------------------------------------------------------- */
+  $$('[data-gallery]').forEach((gallery) => {
+    const image = $('[data-gallery-image]', gallery);
+    const thumbs = $$('[data-gallery-thumb]', gallery);
+    if (!image || !thumbs.length) return;
+    let index = Math.max(0, thumbs.findIndex((t) => t.classList.contains('is-active')));
+
+    const show = (i) => {
+      index = (i + thumbs.length) % thumbs.length;
+      const thumb = thumbs[index];
+      thumbs.forEach((t) => {
+        const on = t === thumb;
+        t.classList.toggle('is-active', on);
+        if (on) t.setAttribute('aria-current', 'true');
+        else t.removeAttribute('aria-current');
+      });
+      const src = thumb.dataset.src;
+      if (!src || image.getAttribute('src') === src) return;
+      image.classList.add('is-loading');
+      const preload = new Image();
+      preload.onload = preload.onerror = () => {
+        image.src = src;
+        image.alt = thumb.dataset.alt || '';
+        image.classList.remove('is-loading');
+      };
+      preload.src = src;
+    };
+
+    thumbs.forEach((thumb, i) => thumb.addEventListener('click', () => show(i)));
+    const prev = $('[data-gallery-prev]', gallery);
+    const next = $('[data-gallery-next]', gallery);
+    if (prev) prev.addEventListener('click', () => show(index - 1));
+    if (next) next.addEventListener('click', () => show(index + 1));
+
+    gallery.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') show(index - 1);
+      if (e.key === 'ArrowRight') show(index + 1);
+    });
+
+    // swipe on touch screens
+    let touchX = null;
+    const main = image.parentElement;
+    main.addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+    main.addEventListener('touchend', (e) => {
+      if (touchX === null) return;
+      const dx = e.changedTouches[0].clientX - touchX;
+      if (Math.abs(dx) > 40) show(index + (dx < 0 ? 1 : -1));
+      touchX = null;
+    });
+  });
 
   /* ------------------------------------------------------------------
    * Phone mask: +38 (0XX) XXX-XX-XX

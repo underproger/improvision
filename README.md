@@ -2,7 +2,7 @@
 
 Статическая вёрстка сайта improvision (HTML + SCSS + vanilla JS) по макетам Figma, десктоп 1440.
 
-Готово: `index.html` (главная), `about.html` (Про нас), `service-facades.html` (шаблон страницы услуги).
+Готово: `index.html` (главная), `about.html` (Про нас), `service-facades.html` (шаблон услуги), `projects.html` (список проектов), `project.html` (шаблон проекта).
 
 ## Структура
 
@@ -58,3 +58,6 @@ npm run watch:html   # пересборка HTML при изменениях
 - Страница услуги: текст статьи оформляется классом `.prose` (p, h3, figure, blockquote, списки) — подходит для вывода из CMS.
   Компоненты внутри: `.checklist-box`, `.callout`, `.stages`, `.materials` (табы: у каждого материала своё фото).
 - Карточки проектов — отдельные партиалы `src/html/partials/cards/project-*.html`.
+- Список проектов: фильтр работает по карточкам на текущей странице (`data-category`), счётчик — `data-filter-count`;
+  пагинация — обычные ссылки (`?page=2`), на CMS её отдаёт бэкенд.
+- Проект: галерея `data-gallery` — у миниатюры `data-src` (большое фото) и `data-alt`; стрелки, клик, свайп, ←/→.

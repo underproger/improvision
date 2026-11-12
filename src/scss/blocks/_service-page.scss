@@ -188,6 +188,28 @@
   }
 }
 
+// wider card (project page)
+.consult-card--wide {
+  padding: 36px 40px 44px;
+
+  .consult-card__text {
+    max-width: none;
+  }
+
+  .consult-card__btn {
+    width: min(100%, 318px);
+    margin-top: 20px;
+  }
+
+  @include down(sm) {
+    padding: 28px 20px 32px;
+
+    .consult-card__btn {
+      width: 100%;
+    }
+  }
+}
+
 // related projects on a grey background
 .projects--related {
   padding: 68px 0 77px;
