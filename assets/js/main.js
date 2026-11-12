@@ -500,21 +500,151 @@
   });
 
   /* ------------------------------------------------------------------
-   * Contacts: "Замовити виїзд" preselects the service in the form
+   * Lead form modal: every link to #contact / #lead-form opens it
+   * (no-JS or no <dialog> support: the link scrolls to the page form)
+   *   data-visit — preselects "site visit"; on a service page the
+   *   current service is preselected.
    * ---------------------------------------------------------------- */
-  $$('[data-visit]').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const select = $('#lead-form [data-select]');
-      if (!select) return;
-      const option = select.querySelector('[data-visit-option]');
+  const norm = (str) => str.replace(/\s+/g, ' ').trim();
+  const modal = $('[data-modal]');
+  const canModal = !!(modal && typeof modal.showModal === 'function');
+
+  const openModal = ({ visit = false } = {}) => {
+    const select = $('[data-modal-service]', modal);
+    if (select) {
+      let option = null;
+      if (visit) {
+        option = select.querySelector('[data-visit-option]');
+      } else {
+        const current = $('.service-menu [aria-current="page"]');
+        if (current) option = Array.from(select.options).find((o) => norm(o.text) === norm(current.textContent));
+      }
       if (option) {
-        select.value = option.value || option.text;
+        option.selected = true;
         select.dispatchEvent(new Event('change'));
       }
-      const name = $('#lead-form [name="name"]');
-      if (name) window.setTimeout(() => name.focus({ preventScroll: true }), 500);
+    }
+    modal.showModal();
+    document.body.classList.add('is-locked');
+    const name = $('[name="name"]', modal);
+    if (name && window.matchMedia('(hover: hover)').matches) name.focus();
+  };
+
+  if (canModal) {
+    document.addEventListener('click', (e) => {
+      const trigger = e.target.closest('a[href="#contact"], a[href="#lead-form"], [data-modal-open]');
+      if (!trigger) return;
+      e.preventDefault();
+      setMenu(false);
+      openModal({ visit: trigger.hasAttribute('data-visit') });
     });
-  });
+    modal.addEventListener('click', (e) => {
+      // click on the backdrop (outside the white box)
+      if (e.target === modal || e.target.closest('[data-modal-close]')) modal.close();
+    });
+    modal.addEventListener('close', () => document.body.classList.remove('is-locked'));
+  }
+
+  /* ------------------------------------------------------------------
+   * Back to top
+   * ---------------------------------------------------------------- */
+  const toTop = $('[data-to-top]');
+  if (toTop) {
+    const sync = () => toTop.classList.toggle('is-visible', window.scrollY > 600);
+    sync();
+    window.addEventListener('scroll', sync, { passive: true });
+    toTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
+    });
+  }
+
+  /* ------------------------------------------------------------------
+   * Gallery lightbox with zoom (project page)
+   *   click / tap on the photo — zoom ×2.5 at that point, move the
+   *   mouse (or drag a finger) to look around; arrows, ←/→, swipe.
+   * ---------------------------------------------------------------- */
+  const lightbox = $('[data-lightbox]');
+  const galleryEl = $('[data-gallery]');
+  if (lightbox && galleryEl && typeof lightbox.showModal === 'function') {
+    const thumbs = $$('[data-gallery-thumb]', galleryEl);
+    const img = $('[data-lightbox-img]', lightbox);
+    const stage = $('[data-lightbox-stage]', lightbox);
+    const counter = $('[data-lightbox-counter]', lightbox);
+    const count = thumbs.length;
+    let index = 0;
+    let zoomed = false;
+
+    const setOrigin = (x, y) => {
+      const r = img.getBoundingClientRect();
+      const px = Math.min(100, Math.max(0, ((x - r.left) / r.width) * 100));
+      const py = Math.min(100, Math.max(0, ((y - r.top) / r.height) * 100));
+      img.style.transformOrigin = `${px}% ${py}%`;
+    };
+    const setZoom = (on, x, y) => {
+      if (on && x !== undefined) setOrigin(x, y);
+      zoomed = on;
+      lightbox.classList.toggle('is-zoomed', on);
+    };
+    const show = (i) => {
+      index = (i + count) % count;
+      const thumb = thumbs[index];
+      setZoom(false);
+      img.style.transformOrigin = '50% 50%';
+      img.src = thumb.dataset.src;
+      img.alt = thumb.dataset.alt || '';
+      counter.textContent = `${index + 1} / ${count}`;
+    };
+    const open = () => {
+      const active = thumbs.findIndex((t) => t.classList.contains('is-active'));
+      show(active < 0 ? 0 : active);
+      lightbox.showModal();
+      document.body.classList.add('is-locked');
+    };
+
+    $('[data-gallery-image]', galleryEl).addEventListener('click', open);
+    const zoomBtn = $('[data-gallery-zoom]', galleryEl);
+    if (zoomBtn) zoomBtn.addEventListener('click', open);
+
+    $('[data-lightbox-prev]', lightbox).addEventListener('click', () => show(index - 1));
+    $('[data-lightbox-next]', lightbox).addEventListener('click', () => show(index + 1));
+    $('[data-lightbox-close]', lightbox).addEventListener('click', () => lightbox.close());
+    lightbox.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') show(index - 1);
+      if (e.key === 'ArrowRight') show(index + 1);
+    });
+    lightbox.addEventListener('close', () => {
+      document.body.classList.remove('is-locked');
+      setZoom(false);
+      if (thumbs[index]) thumbs[index].click(); // keep the page gallery on the same photo
+    });
+
+    // pointer: tap/click = zoom toggle, drag while zoomed = pan, swipe = next/prev
+    let start = null;
+    let moved = false;
+    stage.addEventListener('pointerdown', (e) => {
+      start = { x: e.clientX, y: e.clientY };
+      moved = false;
+    });
+    stage.addEventListener('pointermove', (e) => {
+      if (start && Math.hypot(e.clientX - start.x, e.clientY - start.y) > 8) moved = true;
+      if (zoomed && (e.pointerType === 'mouse' || start)) setOrigin(e.clientX, e.clientY);
+    });
+    stage.addEventListener('pointerup', (e) => {
+      if (!start) return;
+      const dx = e.clientX - start.x;
+      const onImage = e.target === img;
+      if (!moved) {
+        if (onImage) setZoom(!zoomed, e.clientX, e.clientY);
+        else if (!zoomed) lightbox.close(); // click on the dark area
+      } else if (!zoomed && Math.abs(dx) > 50) {
+        show(index + (dx < 0 ? 1 : -1));
+      }
+      start = null;
+    });
+    stage.addEventListener('pointercancel', () => {
+      start = null;
+    });
+  }
 
   /* ------------------------------------------------------------------
    * Phone mask: +38 (0XX) XXX-XX-XX

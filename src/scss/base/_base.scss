@@ -63,6 +63,23 @@ body {
   }
 }
 
+// On mobile the section button ("Усі проєкти", "Усі статті"…) goes after the content
+@include down(md) {
+  .container:has(> .section-head) {
+    display: flex;
+    flex-direction: column;
+
+    > .section-head {
+      display: contents;
+    }
+
+    > .section-head > .btn {
+      order: 10;
+      margin-top: 28px;
+    }
+  }
+}
+
 // Title + button row
 .section-head {
   display: flex;
@@ -104,4 +121,15 @@ body {
 :focus-visible {
   outline: 2px solid $c-blue;
   outline-offset: 3px;
+}
+
+// Very narrow phones (≤359px): long words like «енергоефективність» or
+// «реконструкционные» must not stick out of headings — hyphenate / wrap them.
+@media (max-width: 359.98px) {
+  h1,
+  h2,
+  h3 {
+    hyphens: auto;
+    overflow-wrap: break-word;
+  }
 }

@@ -1,0 +1,298 @@
+@use '../base/variables' as *;
+
+// ==========================================================================
+// Modal (lead form), lightbox (project gallery), back-to-top button
+// Both overlays are native <dialog> elements opened with showModal().
+// ==========================================================================
+
+@keyframes overlay-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes modal-in {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.98);
+  }
+}
+
+// ---- Lead form modal ----
+.modal {
+  width: min(560px, calc(100% - 32px));
+  max-width: none;
+  max-height: calc(100% - 32px);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: $c-text;
+  overflow: visible;
+
+  &::backdrop {
+    background: rgba(5, 35, 66, 0.62);
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+  }
+
+  &[open] {
+    animation: modal-in 0.3s cubic-bezier(0.2, 0.65, 0.3, 1);
+  }
+
+  &[open]::backdrop {
+    animation: overlay-fade 0.3s ease;
+  }
+
+  &__box {
+    position: relative;
+    max-height: calc(100dvh - 32px);
+    padding: 40px 40px 34px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    background: $c-white;
+    box-shadow: 0 30px 80px rgba(5, 35, 66, 0.25);
+  }
+
+  &__close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    color: $c-text;
+    transition: color 0.2s;
+
+    .icon {
+      width: 16px;
+      height: 16px;
+    }
+
+    @include hover {
+      color: $c-blue;
+    }
+  }
+
+  &__title {
+    padding-right: 36px;
+    font-size: clamp(1.5rem, 1.2rem + 0.8vw, 1.875rem);
+    line-height: 1.2;
+    font-weight: 700;
+  }
+
+  &__text {
+    margin-top: 8px;
+    font-size: 15px;
+    line-height: 22px;
+  }
+
+  .form {
+    margin-top: 20px;
+  }
+
+  @include down(sm) {
+    &__box {
+      padding: 32px 20px 26px;
+    }
+  }
+}
+
+// ---- Gallery lightbox ----
+.lightbox {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: rgba(3, 10, 20, 0.98);
+  color: $c-white;
+  overflow: hidden;
+
+  &::backdrop {
+    background: rgba(3, 10, 20, 0.98);
+  }
+
+  &[open] {
+    animation: overlay-fade 0.25s ease;
+  }
+
+  &__stage {
+    position: absolute;
+    inset: 72px 92px 56px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    touch-action: none;
+  }
+
+  &__img {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    cursor: zoom-in;
+    transition: transform 0.3s ease;
+    user-select: none;
+    -webkit-user-drag: none;
+  }
+
+  &.is-zoomed &__img {
+    cursor: zoom-out;
+    transform: scale(2.5);
+  }
+
+  &__counter {
+    position: absolute;
+    top: 26px;
+    left: 28px;
+    font-size: 14px;
+    line-height: 20px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+
+  &__hint {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 18px;
+    font-size: 13px;
+    line-height: 18px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.55);
+    pointer-events: none;
+  }
+
+  &.is-zoomed &__hint {
+    opacity: 0;
+  }
+
+  &__btn {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    color: $c-white;
+    transition:
+      background-color 0.2s,
+      color 0.2s,
+      border-color 0.2s;
+
+    .icon {
+      width: 16px;
+      height: 16px;
+    }
+
+    .icon--long {
+      width: 17px;
+      height: 10px;
+    }
+
+    @include hover {
+      background: $c-white;
+      border-color: $c-white;
+      color: $c-text;
+    }
+  }
+
+  &__close {
+    top: 12px;
+    right: 12px;
+    border-color: transparent;
+  }
+
+  &__nav {
+    top: 50%;
+    margin-top: -26px;
+
+    &--prev {
+      left: 20px;
+    }
+
+    &--next {
+      right: 20px;
+    }
+  }
+
+  @include down(md) {
+    &__stage {
+      inset: 60px 0 86px;
+    }
+
+    &__nav {
+      top: auto;
+      bottom: 22px;
+      margin-top: 0;
+      width: 46px;
+      height: 46px;
+
+      &--prev {
+        left: 16px;
+      }
+
+      &--next {
+        right: 16px;
+      }
+    }
+
+    &__hint {
+      bottom: 36px;
+      padding: 0 76px;
+    }
+  }
+}
+
+// ---- Back to top ----
+.to-top {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 90;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  background: $c-blue;
+  color: $c-white;
+  box-shadow: 0 10px 24px rgba(24, 124, 225, 0.35);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(12px);
+  transition:
+    opacity 0.25s,
+    transform 0.25s,
+    visibility 0.25s,
+    background-color 0.2s;
+
+  .icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  &.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  @include hover {
+    background: $c-blue-hover;
+  }
+
+  @include down(md) {
+    right: 16px;
+    bottom: 16px;
+    width: 44px;
+    height: 44px;
+  }
+}

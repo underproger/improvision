@@ -51,6 +51,26 @@
     margin-left: 20px;
   }
 
+  // phone icon: mobile only (the number is hidden there)
+  &__call {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    color: currentColor;
+    transition: color 0.2s;
+
+    .icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    @include hover {
+      color: $c-blue;
+    }
+  }
+
   // White state: after scroll / inner pages / open menu
   &.is-solid,
   &.is-menu-open {
@@ -74,6 +94,10 @@
     &__phone,
     &__cta {
       display: none;
+    }
+
+    &__call {
+      display: flex;
     }
   }
 }
@@ -397,7 +421,7 @@
   }
 
   @include down(md) {
-    margin-left: auto;
+    margin-left: 6px;
   }
 }
 

@@ -14,9 +14,9 @@
   <meta property="og:title" content="Ресторан у ТРЦ ArtMall — improvision">
   <meta property="og:description" content="Комплексне облаштування ресторану KFC у ТРЦ ArtMall: вхідна група, фасадні елементи, світлові вивіски, внутрішня навігація та POS-конструкції під ключ.">
   <meta property="og:url" content="https://improvision.com.ua/project.html">
-  <meta property="og:image" content="https://improvision.com.ua/assets/img/photos/kfc-artmall-1.jpg">
+  <meta property="og:image" content="https://improvision.com.ua/assets/img/photos/kfc-night.jpg">
 
-  <link rel="preload" as="image" href="assets/img/photos/kfc-artmall-1.jpg">
+  <link rel="preload" as="image" href="assets/img/photos/kfc-night.jpg">
   <!-- @include head-assets -->
 
   <script type="application/ld+json">
@@ -59,30 +59,43 @@
       </div>
       <div class="gallery" data-gallery data-reveal="fade">
         <div class="gallery__main">
-          <img class="gallery__image" src="assets/img/photos/kfc-artmall-1.jpg" width="800" height="450" alt="Фасад ресторану KFC у ТРЦ ArtMall вночі" fetchpriority="high" data-gallery-image>
+          <img class="gallery__image" src="assets/img/photos/kfc-night.jpg" width="1448" height="1086" alt="Фасад ресторану KFC у ТРЦ ArtMall вночі" fetchpriority="high" data-gallery-image>
           <button class="gallery__nav gallery__nav--prev" type="button" aria-label="Попереднє фото" data-gallery-prev>{{icon:arrow-left}}</button>
           <button class="gallery__nav gallery__nav--next" type="button" aria-label="Наступне фото" data-gallery-next>{{icon:arrow-right}}</button>
+          <button class="gallery__zoom" type="button" aria-label="Збільшити фото" data-gallery-zoom>{{icon:zoom}}</button>
         </div>
         <div class="gallery__thumbs">
-          <button class="gallery__thumb is-active" type="button" aria-label="Фото 1 з 5" aria-current="true" data-gallery-thumb data-src="assets/img/photos/kfc-artmall-1.jpg" data-alt="Фасад ресторану KFC у ТРЦ ArtMall вночі">
-            <img src="assets/img/photos/kfc-artmall-1.jpg" width="800" height="450" alt="" loading="lazy">
+          <button class="gallery__thumb is-active" type="button" aria-label="Фото 1 з 5" aria-current="true" data-gallery-thumb data-src="assets/img/photos/kfc-night.jpg" data-alt="Фасад ресторану KFC у ТРЦ ArtMall вночі">
+            <img src="assets/img/photos/kfc-night.jpg" width="1448" height="1086" alt="" loading="lazy">
           </button>
-          <button class="gallery__thumb" type="button" aria-label="Фото 2 з 5" data-gallery-thumb data-src="assets/img/photos/kfc-artmall-2.jpg" data-alt="Світлові вивіски KFC на фасаді ТРЦ">
-            <img src="assets/img/photos/kfc-artmall-2.jpg" width="800" height="450" alt="" loading="lazy">
+          <button class="gallery__thumb" type="button" aria-label="Фото 2 з 5" data-gallery-thumb data-src="assets/img/photos/kfc-dusk.jpg" data-alt="Світлові вивіски KFC Авто на фасаді ТРЦ">
+            <img src="assets/img/photos/kfc-dusk.jpg" width="1448" height="1086" alt="" loading="lazy">
           </button>
           <button class="gallery__thumb" type="button" aria-label="Фото 3 з 5" data-gallery-thumb data-src="assets/img/photos/kfc-artmall-3.jpg" data-alt="Ресторан KFC всередині ТРЦ ArtMall">
             <img src="assets/img/photos/kfc-artmall-3.jpg" width="1600" height="900" alt="" loading="lazy">
           </button>
           <button class="gallery__thumb" type="button" aria-label="Фото 4 з 5" data-gallery-thumb data-src="assets/img/photos/kfc-artmall-4.jpg" data-alt="Обʼємні світлові літери KFC над входом">
-            <img src="assets/img/photos/kfc-artmall-4.jpg" width="800" height="450" alt="" loading="lazy">
+            <img src="assets/img/photos/kfc-artmall-4.jpg" width="1068" height="601" alt="" loading="lazy">
           </button>
-          <button class="gallery__thumb" type="button" aria-label="Фото 5 з 5" data-gallery-thumb data-src="assets/img/photos/kfc-artmall-5.jpg" data-alt="Вхідна група ресторану KFC">
-            <img src="assets/img/photos/kfc-artmall-5.jpg" width="800" height="450" alt="" loading="lazy">
+          <button class="gallery__thumb" type="button" aria-label="Фото 5 з 5" data-gallery-thumb data-src="assets/img/photos/kfc-artmall-5.jpg" data-alt="Лайтбокс KFC і вивіска KFC Авто">
+            <img src="assets/img/photos/kfc-artmall-5.jpg" width="900" height="506" alt="" loading="lazy">
           </button>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- ============================== LIGHTBOX ============================== -->
+  <dialog class="lightbox" aria-label="Перегляд фото" data-lightbox>
+    <div class="lightbox__stage" data-lightbox-stage>
+      <img class="lightbox__img" src="assets/img/photos/kfc-night.jpg" width="1448" height="1086" alt="" data-lightbox-img>
+    </div>
+    <p class="lightbox__counter" aria-live="polite" data-lightbox-counter>1 / 5</p>
+    <p class="lightbox__hint">Натисніть на фото, щоб збільшити</p>
+    <button class="lightbox__btn lightbox__close" type="button" aria-label="Закрити" data-lightbox-close>{{icon:close}}</button>
+    <button class="lightbox__btn lightbox__nav lightbox__nav--prev" type="button" aria-label="Попереднє фото" data-lightbox-prev>{{icon:arrow-left}}</button>
+    <button class="lightbox__btn lightbox__nav lightbox__nav--next" type="button" aria-label="Наступне фото" data-lightbox-next>{{icon:arrow-right}}</button>
+  </dialog>
 
   <!-- ============================== PROJECT BODY ============================== -->
   <section class="project-body">

@@ -144,8 +144,32 @@
   }
 }
 
+.service-aside__title {
+  display: none;
+
+  @include down(xl) {
+    display: block;
+    grid-column: 1 / -1;
+    margin-bottom: -10px;
+    font-size: clamp(1.5rem, 1.2rem + 0.8vw, 1.875rem);
+    line-height: 1.2;
+    font-weight: 700;
+  }
+}
+
 .service-menu {
   border: 1px solid $c-line;
+
+  // below 1200px the list is "other services": the current one is not needed
+  @include down(xl) {
+    li.is-current {
+      display: none;
+    }
+
+    li.is-current:first-child + li {
+      border-top: 0;
+    }
+  }
 
   li + li {
     border-top: 1px solid $c-line;

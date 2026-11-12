@@ -82,26 +82,141 @@
     padding: calc(var(--header-h) + 100px) 0 100px;
   }
 
+  // ---- Mobile (mockup): text → photo → buttons → features in one row ----
   @include down(md) {
-    padding: calc(var(--header-h) + 56px) 0 56px;
+    display: flex;
+    flex-direction: column;
+    padding: calc(var(--header-h) + 22px) 0 44px;
+    background: $c-hero-mobile;
+
+    &::before {
+      display: none;
+    }
+
+    // children of the container become flex items, so the photo can sit between them
+    > .container {
+      display: contents;
+    }
+
+    &__title,
+    &__text,
+    &__actions,
+    &__features {
+      padding-inline: var(--gutter);
+    }
 
     &__title {
-      line-height: 1.08;
+      order: 1;
+      max-width: none;
+      font-size: clamp(1.5rem, 7.4vw, 1.875rem);
+      line-height: 1.12;
+
+      .br-desk {
+        display: inline;
+      }
     }
 
     &__text {
-      margin-top: 24px;
+      order: 2;
+      max-width: 34em;
+      margin-top: 16px;
+      font-size: 15px;
+      line-height: 1.5;
     }
 
-    &__features {
-      margin-top: 40px;
-      gap: 16px 24px;
-    }
-  }
+    &__picture {
+      order: 3;
+      position: relative;
+      display: block;
+      margin-top: 10px;
 
-  @include down(sm) {
-    &__features {
+      // soft edges into the background
+      &::before,
+      &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      &::before {
+        top: 0;
+        height: 22%;
+        background: linear-gradient(180deg, $c-hero-mobile, rgba($c-hero-mobile, 0));
+      }
+
+      &::after {
+        bottom: 0;
+        height: 28%;
+        background: linear-gradient(0deg, $c-hero-mobile, rgba($c-hero-mobile, 0));
+      }
+    }
+
+    &__bg {
+      position: static;
+      z-index: auto;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 941 / 624;
+      object-fit: cover;
+      animation: none !important;
+    }
+
+    &__actions {
+      order: 4;
       flex-direction: column;
+      gap: 14px;
+      margin-top: -12px;
+      position: relative;
+      z-index: 2;
+
+      .btn {
+        width: 100%;
+      }
+    }
+
+    &__features {
+      order: 5;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      gap: 0;
+      margin-top: 34px;
+    }
+
+    &__feature {
+      // width follows the content, spare space is shared evenly → no overlap at 320–414px
+      flex: 1 1 auto;
+      gap: clamp(5px, 1.8vw, 8px);
+      padding: 2px 0 2px clamp(8px, 3vw, 14px);
+      border-left: 1px solid rgba(255, 255, 255, 0.16);
+      font-size: clamp(11px, 3.25vw, 13px);
+      line-height: 1.3;
+      white-space: nowrap;
+
+      &:first-child {
+        padding-left: 0;
+        border-left: 0;
+      }
+
+      img {
+        width: clamp(22px, 7vw, 28px);
+        height: clamp(22px, 7vw, 28px);
+      }
+
+      // very narrow phones: icon above the text, so long words still fit in a row
+      @media (max-width: 359.98px) {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+        font-size: 12px;
+
+        img {
+          width: 24px;
+          height: 24px;
+        }
+      }
     }
   }
 }

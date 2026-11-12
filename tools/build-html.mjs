@@ -72,7 +72,7 @@ function render(template, params = {}, depth = 0) {
     let html = render(read(file), local, depth + 1).replace(/\n$/, '');
     if (name === 'header') html = applyHeader(html, local);
     if (name === 'service-aside' && local.current) {
-      html = html.replace(`<a href="${local.current}">`, `<a href="${local.current}" aria-current="page">`);
+      html = html.replace(`<li><a href="${local.current}">`, `<li class="is-current"><a href="${local.current}" aria-current="page">`);
     }
     return html;
   });
