@@ -1,5 +1,12 @@
 @use 'variables' as *;
 
+// Home: dark hero on top, dark footer at the bottom — the page canvas is dark too.
+// It is seen only when the page is pulled past its edges (iOS / macOS overscroll);
+// the body keeps its own white background, so the page itself does not change.
+html.page-home {
+  background: $c-hero-mobile;
+}
+
 body {
   font-family: $font;
   font-size: 16px;

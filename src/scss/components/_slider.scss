@@ -28,6 +28,11 @@
     scroll-snap-align: start;
   }
 
+  // slides are still flying in (reveal animation, see main.js → holdSnap)
+  &.is-revealing {
+    scroll-snap-type: none;
+  }
+
   &.is-dragging {
     scroll-snap-type: none;
     cursor: grabbing;

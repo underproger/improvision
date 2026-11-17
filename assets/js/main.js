@@ -78,7 +78,38 @@
     revealGroups.push({ trigger: el, items: [el] });
   });
 
-  const showGroup = (g) => g.items.forEach((el) => el.classList.add('is-in'));
+  // A slide that flies in with a transform takes its scroll-snap point with it, and a
+  // snapping track (.slider__track) scrolls after that point — the slider jerks.
+  // Snapping is switched off until every slide of the track has landed.
+  const snapTracks = (items) => {
+    const tracks = new Set();
+    items.forEach((el) => {
+      const track = el.parentElement && el.parentElement.closest('[data-slider-track]');
+      if (track) tracks.add(track);
+    });
+    return tracks;
+  };
+
+  // called after the slides got .is-in: wait for their animations, then snap again
+  const releaseSnap = (track) => {
+    const anims = typeof track.getAnimations === 'function'
+      ? Array.from(track.children).flatMap((el) => el.getAnimations())
+      : [];
+    const token = String((Number(track.dataset.revealToken) || 0) + 1);
+    track.dataset.revealToken = token;
+    Promise.all(anims.map((a) => a.finished.catch(() => {}))).then(() => {
+      if (track.dataset.revealToken === token) track.classList.remove('is-revealing');
+    });
+  };
+
+  const showGroup = (g) => {
+    const fresh = g.items.filter((el) => !el.classList.contains('is-in'));
+    if (!fresh.length) return;
+    const tracks = snapTracks(fresh);
+    tracks.forEach((track) => track.classList.add('is-revealing'));
+    fresh.forEach((el) => el.classList.add('is-in'));
+    tracks.forEach(releaseSnap);
+  };
 
   if (!('IntersectionObserver' in window) || reducedMotion) {
     revealGroups.forEach(showGroup);
